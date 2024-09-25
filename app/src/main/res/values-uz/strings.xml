@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BankAuthCompose</string>
+    <string name="sign_up_screen_registration">Roʻyxatdan oʻtish</string>
+    <string name="sign_up_screen_phone_number">Telefon raqamingizni kiriting</string>
+    <string name="sign_up_screen_name">Ismni kiriting</string>
+    <string name="sign_up_screen_surname">Familiyani kiriting</string>
+    <string name="sign_up_screen_born_date">Tug\'ilgan sanani kiriting</string>
+    <string name="sign_up_screen_continue">Davom eting</string>
+    <string name="sign_up_screen_phone_number_error">Raqam 12 ta raqamdan iborat bo\'lishi kerak</string>
+    <string name="sign_up_screen_name_error">Ism uzunligi noto‘g‘ri</string>
+    <string name="sign_up_screen_surname_error">Familiya uzunligi noto‘g‘ri</string>
+    <string name="sign_up_screen_born_date_error">Sana formati noto‘g‘ri</string>
+    <string name="sign_up_verify_screen_registration">Roʻyxatdan oʻtish</string>
+    <string name="sign_up_verify_screen_phone">Quyidagi raqamga yuborilgan kodni kiriting</string>
+    <string name="sign_up_verify_screen_resend_text1">"Kodni qayta yuboriladi: "</string>
+    <string name="sign_up_verify_screen_continue">Keyingisi</string>
+    <string name="sign_up_verify_screen_resend_text3">Qayta yuborish</string>
+    <string name="sign_up_verify_screen_resend_text2">" soniya"</string>
+    <string name="password_screen_enter_pin">PIN kodingizni kiriting</string>
+    <string name="password_screen_error_pin">PIN noto\'g\'ri terilgan</string>
+    <string name="home_screen_sum">so\'m</string>
+    <string name="home_screen_ATMs">Bankomatlar</string>
+    <string name="home_screen_bramches">Filiallar</string>
+    <string name="home_screen_currency">Valyuta</string>
+    <string name="home_screen_sell">Sotish</string>
+    <string name="home_screen_buy">Olish</string>
+    <string name="home_screen_exchange">Almashtirish</string>
+    <string name="home_screen_exchange_in_app">Ilovadagi kurs</string>
+    <string name="home_screen_free_transfers">Bepul o\'tkazmalar\n5 000 000 so\'mgacha</string>
+    <string name="home_screen_monitoring">Monitoring</string>
+    <string name="home_screen_card">Kartalar</string>
+    <string name="home_screen_show_all">Barchasini ko\'rish</string>
+    <string name="home_screen_over_all_balance">Umumiy balans</string>
+    <string name="home_screen_online">Onlayn</string>
+    <string name="home_screen_microloan">mikroqarz</string>
+    <string name="home_screen_get">Olish</string>
+    <string name="home_screen_golden">Zolotaya</string>
+    <string name="home_screen_crown">korona</string>
+    <string name="home_screen_exchange2">Valyuta</string>
+    <string name="home_screen_currency2">almashtirish</string>
+    <string name="home_screen_exchange3">Almashtirish</string>
+    <string name="home_screen_debet">Debet</string>
+    <string name="home_screen_cards">kartalari</string>
+    <string name="home_screen_order">buyurtma</string>
+    <string name="home_screen_has_cards">Sizda karta yo\'q</string>
+</resources>

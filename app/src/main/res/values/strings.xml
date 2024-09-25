@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">BankAuthCompose</string>
+    <string name="sign_up_screen_registration">Регистрация</string>
+    <string name="sign_up_screen_phone_number">Введите свой номер телефона</string>
+    <string name="sign_up_screen_phone_number_error">Номер должен состоять из 12 цифр</string>
+    <string name="sign_up_screen_name">Введите имя</string>
+    <string name="sign_up_screen_name_error">Недопустимая длина имени</string>
+    <string name="sign_up_screen_surname">Введите фамилию</string>
+    <string name="sign_up_screen_surname_error">Недопустимая длина фамилии</string>
+    <string name="sign_up_screen_born_date">Введите дату рождения</string>
+    <string name="sign_up_screen_born_date_error">Недопустимый формат даты</string>
+    <string name="sign_up_screen_continue">Продолжить</string>
+
+    <string name="sign_up_verify_screen_registration">Регистрация</string>
+    <string name="sign_up_verify_screen_phone">Введите код отправленный на номер</string>
+    <string name="sign_up_verify_screen_resend_text1">Повторная отправка кода через </string>
+    <string name="sign_up_verify_screen_resend_text2"> секунд</string>
+    <string name="sign_up_verify_screen_resend_text3">Повторная отправка</string>
+    <string name="sign_up_verify_screen_continue">Далее</string>
+
+    <string name="password_screen_enter_pin">Введите ПИН-код</string>
+    <string name="password_screen_error_pin">ПИН-код введён неверно</string>
+
+    <string name="home_screen_sum">сум</string>
+    <string name="home_screen_ATMs">Банкоматы</string>
+    <string name="home_screen_bramches">Филиалы</string>
+    <string name="home_screen_currency">Валюта</string>
+    <string name="home_screen_sell">Продать</string>
+    <string name="home_screen_buy">Купить</string>
+    <string name="home_screen_exchange">Обменять</string>
+    <string name="home_screen_exchange_in_app">Курс в приложении</string>
+    <string name="home_screen_free_transfers">Бесплатные переводы\nдо 5 000 000 сум</string>
+    <string name="home_screen_monitoring">Мониторинг</string>
+    <string name="home_screen_card">Карты</string>
+    <string name="home_screen_show_all">Показать все</string>
+    <string name="home_screen_over_all_balance">Общий баланс</string>
+    <string name="home_screen_online">Онлайн</string>
+    <string name="home_screen_microloan">микрозайм</string>
+    <string name="home_screen_get">Получить</string>
+    <string name="home_screen_golden">Золотая</string>
+    <string name="home_screen_crown">корона</string>
+    <string name="home_screen_exchange2">Обмен</string>
+    <string name="home_screen_currency2">валюты</string>
+    <string name="home_screen_exchange3">Обменять</string>
+    <string name="home_screen_debet">Дебетовые</string>
+    <string name="home_screen_cards">карты</string>
+    <string name="home_screen_order">Заказать</string>
+    <string name="home_screen_has_cards">У вас нет карт</string>
+</resources>

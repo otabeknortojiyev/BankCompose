@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BankAuthCompose</string>
+    <string name="sign_up_screen_registration">Registration</string>
+    <string name="sign_up_screen_phone_number">Enter your phone number</string>
+    <string name="sign_up_screen_name">Enter name</string>
+    <string name="sign_up_screen_surname">Enter last name</string>
+    <string name="sign_up_screen_born_date">Enter date of birth</string>
+    <string name="sign_up_screen_continue">Continue</string>
+    <string name="sign_up_screen_phone_number_error">The number must be 12 digits long</string>
+    <string name="sign_up_screen_name_error">Invalid name length</string>
+    <string name="sign_up_screen_surname_error">Invalid last name length</string>
+    <string name="sign_up_screen_born_date_error">Invalid date format</string>
+    <string name="sign_up_verify_screen_registration">Registration</string>
+    <string name="sign_up_verify_screen_phone">Enter the code sent to the number</string>
+    <string name="sign_up_verify_screen_resend_text1">"Resending the code via "</string>
+    <string name="sign_up_verify_screen_continue">Continue</string>
+    <string name="sign_up_verify_screen_resend_text3">Resend</string>
+    <string name="sign_up_verify_screen_resend_text2">" seconds"</string>
+    <string name="password_screen_enter_pin">Enter your PIN</string>
+    <string name="password_screen_error_pin">Invalid PIN</string>
+    <string name="home_screen_sum">sum</string>
+    <string name="home_screen_ATMs">ATM\'s</string>
+    <string name="home_screen_bramches">Branches</string>
+    <string name="home_screen_currency">Currency</string>
+    <string name="home_screen_sell">Sell</string>
+    <string name="home_screen_buy">Buy</string>
+    <string name="home_screen_exchange">Exchange</string>
+    <string name="home_screen_exchange_in_app">Course in the app</string>
+    <string name="home_screen_free_transfers">Free transfers\nup to 5,000,000 sum</string>
+    <string name="home_screen_monitoring">Monitoring</string>
+    <string name="home_screen_card">Cards</string>
+    <string name="home_screen_show_all">Show all</string>
+    <string name="home_screen_over_all_balance">Overall balance</string>
+    <string name="home_screen_online">Online</string>
+    <string name="home_screen_microloan">microloan</string>
+    <string name="home_screen_get">Get</string>
+    <string name="home_screen_golden">Zolotaya</string>
+    <string name="home_screen_crown">korona</string>
+    <string name="home_screen_exchange2">Exchange</string>
+    <string name="home_screen_currency2">currency</string>
+    <string name="home_screen_exchange3">Exchange</string>
+    <string name="home_screen_debet">Debit</string>
+    <string name="home_screen_cards">cards</string>
+    <string name="home_screen_order">Order</string>
+    <string name="home_screen_has_cards">You don\'t have a card</string>
+</resources>
