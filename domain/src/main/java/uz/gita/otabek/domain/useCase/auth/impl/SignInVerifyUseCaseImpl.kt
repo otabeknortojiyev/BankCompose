@@ -6,5 +6,5 @@ import uz.gita.otabek.domain.useCase.auth.SignInVerifyUseCase
 import javax.inject.Inject
 
 class SignInVerifyUseCaseImpl @Inject constructor(private val authRepository: AuthRepository) : SignInVerifyUseCase {
-    override fun invoke(data: AuthRequest.SignInVerify) = authRepository.signInVerify(data)
+    override fun invoke(code:String) = authRepository.signInVerify(code)
 }

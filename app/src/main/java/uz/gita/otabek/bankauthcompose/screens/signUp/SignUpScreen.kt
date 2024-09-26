@@ -50,6 +50,8 @@ import uz.gita.otabek.bankauthcompose.utils.Date
 import uz.gita.otabek.bankauthcompose.utils.MaskVisualTransformation
 import uz.gita.otabek.bankauthcompose.utils.Phone
 import uz.gita.otabek.bankauthcompose.utils.isLetter
+import uz.gita.otabek.presenter.signUp.SignUpContract
+import uz.gita.otabek.presenter.signUp.SignUpViewModel
 
 object SignUpScreen : Screen {
     private fun readResolve(): Any = SignUpScreen
@@ -57,7 +59,8 @@ object SignUpScreen : Screen {
     @Composable
     override fun Content() {
         val viewModel: SignUpContract.ViewModel = getViewModel<SignUpViewModel>()
-        SignUpScreenContent(viewModel.collectAsState(), viewModel::onEventDispatcher)
+        val uiState = viewModel.collectAsState()
+        SignUpScreenContent(uiState, viewModel::onEventDispatcher)
     }
 }
 
@@ -66,20 +69,20 @@ fun SignUpScreenContent(
     uiState: State<SignUpContract.UiState>,
     onEventDispatcher: (SignUpContract.Intent) -> Unit,
 ) {
-    val phone = remember { mutableStateOf("") }
-    val name = remember { mutableStateOf("") }
-    val surname = remember { mutableStateOf("") }
-    val birthDate = remember { mutableStateOf("") }
-    val password = remember { mutableStateOf("7777") }
-    val gender = remember { mutableStateOf("0") }
-
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
             .background(PasswordBackGroundGray)
     ) {
         val guidLine1 = createGuidelineFromTop(0.1f)
+        val guidLine8 = createGuidelineFromTop(0.8f)
         val guidLine9 = createGuidelineFromTop(0.9f)
+        val phone = remember { mutableStateOf("") }
+        val name = remember { mutableStateOf("") }
+        val surname = remember { mutableStateOf("") }
+        val birthDate = remember { mutableStateOf("") }
+        val password = remember { mutableStateOf("7777") }
+        val gender = remember { mutableStateOf("0") }
         Image(
             painter = painterResource(id = R.drawable.arrow_left),
             contentDescription = null,
@@ -96,6 +99,7 @@ fun SignUpScreenContent(
             .constrainAs(createRef()) {
                 top.linkTo(guidLine1)
             }) {
+
             Text(
                 text = stringResource(id = R.string.sign_up_screen_registration),
                 style = TextStyle(
@@ -210,6 +214,19 @@ fun SignUpScreenContent(
                 visualTransformation = MaskVisualTransformation(Date.MASK.value)
             )
         }
+
+        Text(
+            text = "Уже есть аккаунт? Войти",
+            modifier = Modifier
+                .constrainAs(createRef()) {
+                    top.linkTo(guidLine8)
+                    bottom.linkTo(guidLine8)
+                }
+                .clip(shape = RoundedCornerShape(10.dp))
+                .clickable {
+                    onEventDispatcher(SignUpContract.Intent.MoveToSignIn)
+                }
+        )
 
         Card(modifier = Modifier
             .fillMaxWidth()

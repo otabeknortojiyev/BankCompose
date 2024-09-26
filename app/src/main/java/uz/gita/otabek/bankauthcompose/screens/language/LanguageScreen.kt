@@ -40,6 +40,8 @@ import uz.gita.otabek.bankauthcompose.ui.theme.LightBlack
 import uz.gita.otabek.bankauthcompose.ui.theme.MainGreen
 import uz.gita.otabek.bankauthcompose.utils.Lang
 import uz.gita.otabek.bankauthcompose.utils.setLanguage
+import uz.gita.otabek.presenter.language.LanguageContract
+import uz.gita.otabek.presenter.language.LanguageViewModel
 
 object LanguageScreen : Screen {
     private fun readResolve(): Any = LanguageScreen
@@ -47,7 +49,8 @@ object LanguageScreen : Screen {
     @Composable
     override fun Content() {
         val viewModel: LanguageContract.ViewModel = getViewModel<LanguageViewModel>()
-        LanguageScreenContent(viewModel.collectAsState(), viewModel::onEventDispatcher)
+        val uiState = viewModel.collectAsState()
+        LanguageScreenContent(uiState, viewModel::onEventDispatcher)
     }
 }
 
@@ -66,7 +69,6 @@ private fun LanguageScreenContent(
         val guideline7 = createGuidelineFromTop(0.7f)
         val guideline8 = createGuidelineFromTop(0.8f)
         val guideline9 = createGuidelineFromTop(0.9f)
-
         Row(
             modifier = Modifier
                 .padding(start = 20.dp)

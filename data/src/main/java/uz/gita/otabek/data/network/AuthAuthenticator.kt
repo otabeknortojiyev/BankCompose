@@ -1,5 +1,6 @@
 package uz.gita.otabek.data.network
 
+import android.util.Log
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
 import okhttp3.Request
@@ -11,9 +12,7 @@ import javax.inject.Inject
 
 internal class AuthAuthenticator @Inject constructor(
     private val localStorage: LocalStorage,
-    private val oAuthApi: AuthApi,
-//    private val appRepository: AppRepository,
-//    private val direction: EntryPointDirection
+    private val oAuthApiLazy: dagger.Lazy<AuthApi>,
 ) : Authenticator {
 
     companion object {
@@ -25,8 +24,12 @@ internal class AuthAuthenticator @Inject constructor(
         val currentToken = runBlocking { localStorage.accessToken }
         synchronized(this) {
             val updatedToken = runBlocking { localStorage.accessToken }
-            val token = if (currentToken != updatedToken) updatedToken else {
-                val newSessionResponse = runBlocking { oAuthApi.updateToken(AuthRequest.UpdateToken(localStorage.refreshToken)) }
+            val token = if (currentToken != updatedToken) {
+                updatedToken
+            } else {
+                val newSessionResponse = runBlocking {
+                    oAuthApiLazy.get().updateToken(AuthRequest.UpdateToken(localStorage.refreshToken))
+                }
                 if (newSessionResponse.isSuccessful && newSessionResponse.body() != null) {
                     newSessionResponse.body()?.let { body ->
                         runBlocking {
@@ -37,15 +40,21 @@ internal class AuthAuthenticator @Inject constructor(
                     }
                 } else null
             }
-//            if (token == null) {
-//                runBlocking {
-//                    appRepository.clearUserData()
-//                    direction.logout()
-//                }
-//            }
-            return if (token != null) response.request.newBuilder()
-                .header(HEADER_AUTHORIZATION, "$TOKEN_TYPE $token")
-                .build() else null
+
+            if (token == null) {
+                runBlocking {
+                    localStorage.accessToken = ""
+                    localStorage.refreshToken = ""
+                    localStorage.token = ""
+                    Log.d("TTT", "authenticate: go to signIn screen")
+                }
+            }
+
+            return if (token != null) {
+                response.request.newBuilder()
+                    .header(HEADER_AUTHORIZATION, "$TOKEN_TYPE $token")
+                    .build()
+            } else null
         }
     }
 }

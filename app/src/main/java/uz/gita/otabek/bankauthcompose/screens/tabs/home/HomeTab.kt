@@ -47,6 +47,9 @@ import uz.gita.otabek.bankauthcompose.R
 import uz.gita.otabek.bankauthcompose.ui.theme.MainGreen
 import uz.gita.otabek.bankauthcompose.ui.theme.PasswordBackGroundGray
 import uz.gita.otabek.bankauthcompose.ui.theme.Purple40
+import uz.gita.otabek.bankauthcompose.utils.formatNumberWithSpaces
+import uz.gita.otabek.presenter.tabs.home.HomeContracts
+import uz.gita.otabek.presenter.tabs.home.HomeViewModel
 
 object HomeTab : Tab {
     private fun readResolve(): Any = HomeTab
@@ -67,7 +70,8 @@ object HomeTab : Tab {
     @Composable
     override fun Content() {
         val viewModel: HomeContracts.ViewModel = getViewModel<HomeViewModel>()
-        HomeScreenContent(viewModel.collectAsState(), viewModel::onEventDispatcher)
+        val uiState = viewModel.collectAsState()
+        HomeScreenContent(uiState, viewModel::onEventDispatcher)
     }
 }
 
@@ -128,7 +132,7 @@ private fun HomeScreenContent(
                             text = if (isHidden) {
                                 "* * * * * * *"
                             } else {
-                                uiState.value.balance.toString()
+                                uiState.value.balance.toString().formatNumberWithSpaces()
                             },
                             style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold))),
                             fontSize = 28.sp
@@ -226,7 +230,7 @@ private fun HomeScreenContent(
                         Text(
                             text = stringResource(id = R.string.home_screen_has_cards),
                             modifier = Modifier
-                                .padding(20.dp)
+                                .padding(start = 20.dp, top = 20.dp, end = 20.dp)
                                 .fillMaxWidth()
                                 .align(alignment = Alignment.CenterHorizontally),
                             style = TextStyle(fontSize = 20.sp, textAlign = TextAlign.Center)
@@ -252,6 +256,19 @@ private fun HomeScreenContent(
                             }
                         }
                     }
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                        Image(
+                            painter = painterResource(id = R.drawable.add_card),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .clip(shape = RoundedCornerShape(16.dp))
+                                .clickable {
+                                    onEventDispatcher(HomeContracts.Intent.MoveToAddCard)
+                                }
+                                .padding(10.dp),
+                            alignment = Alignment.CenterEnd
+                        )
+                    }
                 }
             }
             item {
@@ -261,7 +278,9 @@ private fun HomeScreenContent(
                         .padding(start = 16.dp, end = 16.dp, top = 10.dp)
                         .fillMaxWidth()
                         .clip(shape = RoundedCornerShape(10.dp))
-                        .clickable { }
+                        .clickable {
+                            onEventDispatcher(HomeContracts.Intent.MoveToMonitoring)
+                        }
                         .background(color = Color.LightGray)
                         .padding(top = 16.dp, bottom = 16.dp),
                     textAlign = TextAlign.Center)
@@ -440,12 +459,12 @@ fun MiniCards(type: Int, bottom: Dp, text1: String, text2: String, isHidden: Boo
                 .size(width = 80.dp, height = 50.dp)
                 .clip(shape = RoundedCornerShape(4.dp))
                 .background(
-                    if (type == 0) {
+                    if (type % 2 == 0) {
                         MainGreen
                     } else Color.White
                 )
                 .border(
-                    width = if (type == 0) 0.dp else 1.dp, shape = RoundedCornerShape(4.dp), color = Color.LightGray
+                    width = if (type % 2 == 0) 0.dp else 1.dp, shape = RoundedCornerShape(4.dp), color = Color.LightGray
                 ), verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
@@ -453,7 +472,7 @@ fun MiniCards(type: Int, bottom: Dp, text1: String, text2: String, isHidden: Boo
                 style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold))),
                 modifier = Modifier.padding(bottom = 6.dp, start = 8.dp)
             )
-            Image(painter = painterResource(id = if (type == 0) R.drawable.humo2 else R.drawable.uzcard), contentDescription = null)
+            Image(painter = painterResource(id = if (type % 2 == 0) R.drawable.humo2 else R.drawable.uzcard), contentDescription = null)
         }
         Column(modifier = Modifier.padding(start = 16.dp, top = 16.dp), verticalArrangement = Arrangement.SpaceAround) {
             Row(
@@ -462,7 +481,7 @@ fun MiniCards(type: Int, bottom: Dp, text1: String, text2: String, isHidden: Boo
                     .padding(2.dp), verticalAlignment = Alignment.Bottom
             ) {
                 Text(
-                    text = if (isHidden) "* * * * * * *" else text2,
+                    text = if (isHidden) "* * * * * * *" else text2.formatNumberWithSpaces(),
                     style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 20.sp)
                 )
                 Text(
@@ -472,7 +491,7 @@ fun MiniCards(type: Int, bottom: Dp, text1: String, text2: String, isHidden: Boo
                 )
             }
             Text(
-                text = if (type == 0) "HUMO" else "UZCARD",
+                text = if (type % 2 == 0) "HUMO" else "UZCARD",
                 style = TextStyle(color = Color.Gray, fontFamily = FontFamily(Font(R.font.montserrat_regular)), fontSize = 12.sp)
             )
         }

@@ -1,22 +1,6 @@
 package uz.gita.otabek.bankauthcompose.utils
 
 import android.content.Context
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
-import cafe.adriel.voyager.navigator.tab.Tab
 
 fun String.isLetter(): Boolean {
     var count: Int = 0
@@ -41,11 +25,26 @@ enum class Lang {
     uz, ru, en
 }
 
+enum class Type(val value: String) {
+    INCOME("income"), OUTCOME("outcome")
+}
+
 enum class Phone(val value: String) {
     PREFIX("+998"),
     MASK("##-###-##-##")
 }
 
+enum class Card(val value: String) {
+    MASK("#### #### #### ####")
+}
+
 enum class Date(val value: String) {
     MASK("##.##.####")
+}
+
+fun String.formatNumberWithSpaces(): String {
+    return this.reversed()
+        .chunked(3)
+        .joinToString(" ")
+        .reversed()
 }

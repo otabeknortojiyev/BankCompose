@@ -38,7 +38,7 @@ sealed interface HomeResponse {
         val type: String,
         val from: String,
         val to: String,
-        val amount: Int,
-        val time: Int
+        val amount: Long,
+        val time: Long
     )
 }

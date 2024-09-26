@@ -27,7 +27,7 @@
     <string name="home_screen_buy">Buy</string>
     <string name="home_screen_exchange">Exchange</string>
     <string name="home_screen_exchange_in_app">Course in the app</string>
-    <string name="home_screen_free_transfers">Free transfers\nup to 5,000,000 sum</string>
+    <string name="home_screen_free_transfers">Free transfers\nup to 5 000 000 sum</string>
     <string name="home_screen_monitoring">Monitoring</string>
     <string name="home_screen_card">Cards</string>
     <string name="home_screen_show_all">Show all</string>
@@ -44,4 +44,14 @@
     <string name="home_screen_cards">cards</string>
     <string name="home_screen_order">Order</string>
     <string name="home_screen_has_cards">You don\'t have a card</string>
+    <string name="add_card_screen_title">Add card</string>
+    <string name="add_card_screen_card_number">Card number</string>
+    <string name="add_card_screen_card_expire_year">Сard expiration date ( Year )</string>
+    <string name="add_card_screen_card_expire_month">Сard expiration date ( Month )</string>
+    <string name="add_card_screen_card_name">Card name</string>
+    <string name="add_card_screen_enter_card_number">Enter card number</string>
+    <string name="add_card_screen_enter_card_year">Enter the card expiration date (year)</string>
+    <string name="add_card_screen_enter_card_month">Enter the card expiration date (month)</string>
+    <string name="add_card_screen_enter_card_name">Enter card name</string>
+    <string name="sign_in_screen_title">Log in</string>
 </resources>

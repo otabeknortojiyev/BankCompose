@@ -1,7 +1,6 @@
 package uz.gita.otabek.bankauthcompose.screens.splash
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
@@ -34,6 +33,8 @@ import uz.gita.otabek.bankauthcompose.R
 import uz.gita.otabek.bankauthcompose.ui.theme.MainGreen
 import uz.gita.otabek.bankauthcompose.utils.Lang
 import uz.gita.otabek.bankauthcompose.utils.setLanguage
+import uz.gita.otabek.presenter.splash.SplashContract
+import uz.gita.otabek.presenter.splash.SplashViewModel
 
 
 object SplashScreen : Screen {
@@ -42,14 +43,16 @@ object SplashScreen : Screen {
     @Composable
     override fun Content() {
         val viewModel: SplashContract.ViewModel = getViewModel<SplashViewModel>()
-        SplashScreenContent(viewModel.collectAsState(), viewModel::onEventDispatcher)
+        val uiState = viewModel.collectAsState()
+        SplashScreenContent(uiState, viewModel::onEventDispatcher)
     }
 }
 
 @SuppressLint("ResourceAsColor")
 @Composable
 private fun SplashScreenContent(
-    uiState: State<SplashContract.UiState>, onEventDispatcher: (SplashContract.Intent) -> Unit
+    uiState: State<SplashContract.UiState>,
+    onEventDispatcher: (SplashContract.Intent) -> Unit
 ) {
     val context = LocalContext.current
     onEventDispatcher(SplashContract.Intent.CheckLanguage)

@@ -7,10 +7,10 @@ interface AuthRepository {
     fun signUp(data: AuthRequest.SignUp): Flow<Result<Unit>>
     fun signUpVerify(code: String): Flow<Result<Unit>>
     fun signIn(data: AuthRequest.SignIn): Flow<Result<Unit>>
-    fun signInVerify(data: AuthRequest.SignInVerify): Flow<Result<Unit>>
+    fun signInVerify(code:String): Flow<Result<Unit>>
     fun updateToken(data: AuthRequest.UpdateToken): Flow<Result<Unit>>
     fun signUpResend(): Flow<Result<Unit>>
-    fun signInResend(data: AuthRequest.SignInResend): Flow<Result<Unit>>
+    fun signInResend(): Flow<Result<Unit>>
     fun savePIN(pin: String)
     fun checkPIN(): Boolean
     fun getPIN(): String

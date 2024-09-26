@@ -11,6 +11,8 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.gita.otabek.data.local.LocalStorage
+import uz.gita.otabek.data.network.AuthApi
+import uz.gita.otabek.data.network.AuthAuthenticator
 import javax.inject.Singleton
 
 @Module
@@ -18,15 +20,21 @@ import javax.inject.Singleton
 class NetworkModule {
 
     @[Provides Singleton]
-    fun providesOkHttpClient(@ApplicationContext context: Context, storage: LocalStorage): OkHttpClient =
-        OkHttpClient.Builder()
-            .addInterceptor(ChuckerInterceptor.Builder(context).build())
-            .addInterceptor {
-                val request = it.request()
-                val newRequest = request.newBuilder().header("Authorization", "Bearer ${storage.accessToken}").build()
-                it.proceed(newRequest)
-            }
-            .build()
+    fun providesOkHttpClient(
+        @ApplicationContext context: Context,
+        storage: LocalStorage,
+        oAuthApiLazy: dagger.Lazy<AuthApi>
+    ): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(ChuckerInterceptor.Builder(context).build())
+        .authenticator(AuthAuthenticator(storage, oAuthApiLazy))
+        .addInterceptor { chain ->
+            val request = chain.request()
+            val newRequest = request.newBuilder()
+                .header("Authorization", "Bearer ${storage.accessToken}")
+                .build()
+            chain.proceed(newRequest)
+        }
+        .build()
 
     @[Provides Singleton]
     fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()

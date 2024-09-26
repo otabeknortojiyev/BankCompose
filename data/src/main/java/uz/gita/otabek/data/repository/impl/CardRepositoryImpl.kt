@@ -1,5 +1,6 @@
 package uz.gita.otabek.data.repository.impl
 
+import android.util.Log
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -19,7 +20,7 @@ class CardRepositoryImpl @Inject constructor(
     override fun getCards(): Flow<Result<CardResponse.GetCards>> = flow {
         val result = api.getCards()
         if (result.isSuccessful && result.body() != null) {
-            emit(Result.success(CardResponse.GetCards))
+            emit(Result.success(result.body()?:CardResponse.GetCards))
         } else if (result.errorBody() != null) {
             val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
 //            emit(Result.failure(Exception(error.message)))

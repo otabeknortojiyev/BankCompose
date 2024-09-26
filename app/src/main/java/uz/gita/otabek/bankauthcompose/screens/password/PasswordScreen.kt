@@ -42,6 +42,8 @@ import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.otabek.bankauthcompose.R
 import uz.gita.otabek.bankauthcompose.ui.theme.MainGreen
 import uz.gita.otabek.bankauthcompose.ui.theme.PasswordBackGroundGray
+import uz.gita.otabek.presenter.password.PasswordContract
+import uz.gita.otabek.presenter.password.PasswordViewModel
 
 object PasswordScreen : Screen {
     private fun readResolve(): Any = PasswordScreen
@@ -49,7 +51,8 @@ object PasswordScreen : Screen {
     @Composable
     override fun Content() {
         val viewModel: PasswordContract.ViewModel = getViewModel<PasswordViewModel>()
-        PasswordScreenContent(viewModel.collectAsState(), viewModel::onEventDispatcher)
+        val uiState = viewModel.collectAsState()
+        PasswordScreenContent(uiState, viewModel::onEventDispatcher)
     }
 }
 

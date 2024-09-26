@@ -52,19 +52,23 @@ import uz.gita.otabek.bankauthcompose.R
 import uz.gita.otabek.bankauthcompose.ui.theme.MainGreen
 import uz.gita.otabek.bankauthcompose.ui.theme.PasswordBackGroundGray
 import uz.gita.otabek.bankauthcompose.utils.AppTextField
+import uz.gita.otabek.presenter.signUpVerify.SignUpVerifyContract
+import uz.gita.otabek.presenter.signUpVerify.SignUpVerifyViewModel
 
 class SignUpVerifyScreen(private val phone: String) : Screen {
 
     @Composable
     override fun Content() {
         val viewModel: SignUpVerifyContract.ViewModel = getViewModel<SignUpVerifyViewModel>()
-        SignUpVerifyScreenContent(viewModel.collectAsState(), viewModel::onEventDispatcher, phone)
+        val uiState = viewModel.collectAsState()
+        SignUpVerifyScreenContent(uiState, viewModel::onEventDispatcher, phone)
     }
 }
 
 @Composable
 fun SignUpVerifyScreenContent(
-    uiState: State<SignUpVerifyContract.UiState>, onEventDispatcher: (SignUpVerifyContract.Intent) -> Unit, phone: String
+    uiState: State<SignUpVerifyContract.UiState>,
+    onEventDispatcher: (SignUpVerifyContract.Intent) -> Unit, phone: String
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -129,7 +133,8 @@ fun SignUpVerifyScreenContent(
                 top.linkTo(guidLine3)
             }) {
             for (i in 0 until 6) {
-                AppTextField(value = textValues[i],
+                AppTextField(
+                    value = textValues[i],
                     onValueChange = { newValue ->
                         if (textValues[0] == "") {
                             focusRequesters[0].requestFocus()

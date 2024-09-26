@@ -67,6 +67,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    implementation(libs.kotlinx.coroutines.core)
+
     //CONSTRAINT_LAYOUT
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.accompanist.systemuicontroller) // Check for the latest version
@@ -98,10 +100,6 @@ dependencies {
     //API REQUEST names
     implementation(libs.kotlinx.serialization.json)
 
-
-    androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.kotlinx.coroutines.core)
-
     //Orbit
     implementation(libs.orbit.core)
     implementation(libs.orbit.viewmodel)
@@ -109,6 +107,5 @@ dependencies {
     testImplementation(libs.orbit.test)
 
     implementation(project(":common"))
-    implementation(project(":domain"))
-
+    implementation(project(":presenter"))
 }

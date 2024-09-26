@@ -45,6 +45,7 @@ class AuthRepositoryImpl @Inject constructor(
     override fun signIn(data: AuthRequest.SignIn): Flow<Result<Unit>> = flow {
         val result = api.signIn(data)
         if (result.isSuccessful && result.body() != null) {
+            localStorage.token = result.body()!!.token
             emit(Result.success(Unit))
         } else if (result.errorBody() != null) {
             val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
@@ -54,9 +55,11 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun signInVerify(data: AuthRequest.SignInVerify): Flow<Result<Unit>> = flow {
-        val result = api.signInVerify(data)
+    override fun signInVerify(code: String): Flow<Result<Unit>> = flow {
+        val result = api.signInVerify(AuthRequest.SignInVerify(localStorage.token, code))
         if (result.isSuccessful && result.body() != null) {
+            localStorage.accessToken = result.body()!!.accessToken
+            localStorage.refreshToken = result.body()!!.refreshToken
             emit(Result.success(Unit))
         } else if (result.errorBody() != null) {
             val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
@@ -91,9 +94,10 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun signInResend(data: AuthRequest.SignInResend): Flow<Result<Unit>> = flow {
-        val result = api.signInResend(data)
+    override fun signInResend(): Flow<Result<Unit>> = flow {
+        val result = api.signInResend(AuthRequest.SignInResend(localStorage.token))
         if (result.isSuccessful && result.body() != null) {
+            localStorage.token = result.body()!!.token
             emit(Result.success(Unit))
         } else if (result.errorBody() != null) {
             val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)

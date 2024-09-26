@@ -44,4 +44,14 @@
     <string name="home_screen_cards">kartalari</string>
     <string name="home_screen_order">buyurtma</string>
     <string name="home_screen_has_cards">Sizda karta yo\'q</string>
+    <string name="add_card_screen_title">Karta qo\'shing</string>
+    <string name="add_card_screen_card_number">Karta raqami</string>
+    <string name="add_card_screen_card_expire_year">Amal qilish muddati ( Yil )</string>
+    <string name="add_card_screen_card_expire_month">OyAmal qilish muddati ( Oy )</string>
+    <string name="add_card_screen_card_name">Karta nomi</string>
+    <string name="add_card_screen_enter_card_number">Karta raqamini kiriting</string>
+    <string name="add_card_screen_enter_card_year">Amal qilish muddatini kiriting ( yil )</string>
+    <string name="add_card_screen_enter_card_month">Amal qilish muddatini kiriting ( oy )</string>
+    <string name="add_card_screen_enter_card_name">Karta nomini kiriting</string>
+    <string name="sign_in_screen_title">Kirish</string>
 </resources>

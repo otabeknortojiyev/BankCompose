@@ -11,6 +11,8 @@
     <string name="sign_up_screen_born_date_error">Недопустимый формат даты</string>
     <string name="sign_up_screen_continue">Продолжить</string>
 
+    <string name="sign_in_screen_title">Вход</string>
+
     <string name="sign_up_verify_screen_registration">Регистрация</string>
     <string name="sign_up_verify_screen_phone">Введите код отправленный на номер</string>
     <string name="sign_up_verify_screen_resend_text1">Повторная отправка кода через </string>
@@ -46,4 +48,14 @@
     <string name="home_screen_cards">карты</string>
     <string name="home_screen_order">Заказать</string>
     <string name="home_screen_has_cards">У вас нет карт</string>
+
+    <string name="add_card_screen_title">Добавить карту</string>
+    <string name="add_card_screen_card_number">Номер карты</string>
+    <string name="add_card_screen_card_expire_year">"Срок действия ( Год ) "</string>
+    <string name="add_card_screen_card_expire_month">Срок действия ( Месяц )</string>
+    <string name="add_card_screen_card_name">Название карты</string>
+    <string name="add_card_screen_enter_card_number">Введите номер карты</string>
+    <string name="add_card_screen_enter_card_year">Введите срок действия карты ( год )</string>
+    <string name="add_card_screen_enter_card_month">Введите срок действия карты ( месяц )</string>
+    <string name="add_card_screen_enter_card_name">Введите название карты</string>
 </resources>
