@@ -24,7 +24,6 @@ class CardRepositoryImpl @Inject constructor(
     override fun getCards(): Flow<Result<List<CardResponse.CardItem>>> = flow {
         val list = dataBase.cardDao().getAllCards()
         emit(Result.success(list))
-        delay(5000)
         val result = api.getCards()
         if (result.isSuccessful && result.body() != null) {
             emit(Result.success(result.body()!!))

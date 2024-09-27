@@ -1,7 +1,6 @@
 package uz.gita.otabek.data.repository.impl
 
 import com.google.gson.Gson
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import uz.gita.otabek.common.ErrorMessage
@@ -18,13 +17,12 @@ class HomeRepositoryImpl @Inject constructor(
     private val gson = Gson()
     override fun totalBalance(): Flow<Result<HomeResponse.TotalBalance>> = flow {
         emit(Result.success(HomeResponse.TotalBalance(storage.totalBalance)))
-        delay(10000)
         val result = api.totalBalance()
         if (result.isSuccessful && result.body() != null) {
             emit(Result.success(HomeResponse.TotalBalance(result.body()!!.totalBalance)))
             storage.totalBalance = result.body()!!.totalBalance
         } else if (result.errorBody() != null) {
-            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
+//            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
 //            emit(Result.failure(Exception(error.message)))
             emit(Result.failure(Exception("Nimadur xato")))
         } else {
@@ -33,11 +31,15 @@ class HomeRepositoryImpl @Inject constructor(
     }
 
     override fun basicInfo(): Flow<Result<HomeResponse.BasicInfo>> = flow {
+        emit(Result.success(HomeResponse.BasicInfo(storage.userName, storage.genderType, storage.userAge)))
         val result = api.basicInfo()
         if (result.isSuccessful && result.body() != null) {
             emit(Result.success(HomeResponse.BasicInfo(result.body()!!.firstName, result.body()!!.genderType, result.body()!!.age)))
+            storage.userName = result.body()!!.firstName
+            storage.genderType = result.body()!!.genderType
+            storage.userAge = result.body()!!.age
         } else if (result.errorBody() != null) {
-            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
+//            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
 //            emit(Result.failure(Exception(error.message)))
             emit(Result.failure(Exception("Nimadur xato")))
         } else {
@@ -56,8 +58,9 @@ class HomeRepositoryImpl @Inject constructor(
                 )
             )
         } else if (result.errorBody() != null) {
-            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            emit(Result.failure(Exception(error.message)))
+//            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
+//            emit(Result.failure(Exception(error.message)))
+            emit(Result.failure(Exception("Nimadur xato")))
         } else {
             emit(Result.failure(Throwable(result.message())))
         }
@@ -68,8 +71,9 @@ class HomeRepositoryImpl @Inject constructor(
         if (result.isSuccessful && result.body() != null) {
             emit(Result.success(HomeResponse.UpdateInfo(result.body()!!.message)))
         } else if (result.errorBody() != null) {
-            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            emit(Result.failure(Exception(error.message)))
+//            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
+//            emit(Result.failure(Exception(error.message)))
+            emit(Result.failure(Exception("Nimadur xato")))
         } else {
             emit(Result.failure(Throwable(result.message())))
         }
@@ -80,8 +84,9 @@ class HomeRepositoryImpl @Inject constructor(
         if (result.isSuccessful && result.body() != null) {
             emit(Result.success(HomeResponse.LastTransfers))
         } else if (result.errorBody() != null) {
-            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            emit(Result.failure(Exception(error.message)))
+//            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
+//            emit(Result.failure(Exception(error.message)))
+            emit(Result.failure(Exception("Nimadur xato")))
         } else {
             emit(Result.failure(Throwable(result.message())))
         }

@@ -14,7 +14,6 @@ interface HomeContracts {
         val balance: Int = 0,
         val name: String = "",
         val cards: List<CardResponse.CardItem> = arrayListOf(),
-        val totalBalance: Int = 0
     )
 
     sealed interface SideEffect {

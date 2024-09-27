@@ -2,7 +2,6 @@ package uz.gita.otabek.data.local
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
-import uz.gita.otabek.common.response.CardResponse
 import javax.inject.Inject
 
 class LocalStorage @Inject constructor(@ApplicationContext context: Context) : SharedPreference(context) {
@@ -12,4 +11,7 @@ class LocalStorage @Inject constructor(@ApplicationContext context: Context) : S
     var pin by strings("")
     var language by strings("")
     var totalBalance by ints(0)
+    var userName by strings("")
+    var userAge by ints(0)
+    var genderType by ints(0)
 }
