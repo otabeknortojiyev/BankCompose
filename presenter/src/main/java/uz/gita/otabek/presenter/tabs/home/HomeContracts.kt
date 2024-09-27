@@ -13,7 +13,8 @@ interface HomeContracts {
         val isLoading: Boolean = false,
         val balance: Int = 0,
         val name: String = "",
-        val cards: ArrayList<CardResponse.CardItem> = arrayListOf()
+        val cards: List<CardResponse.CardItem> = arrayListOf(),
+        val totalBalance: Int = 0
     )
 
     sealed interface SideEffect {

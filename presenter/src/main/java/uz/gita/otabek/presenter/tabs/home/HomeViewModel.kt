@@ -18,7 +18,7 @@ class HomeViewModel @Inject constructor(
     private val direction: HomeContracts.Directions,
     private val totalBalanceUseCase: TotalBalanceUseCase,
     private val basicInfoUseCase: BasicInfoUseCase,
-    private val getCardsUseCase: GetCardsUseCase
+    private val getCardsUseCase: GetCardsUseCase,
 ) : HomeContracts.ViewModel, ViewModel() {
 
     override fun onEventDispatcher(intent: HomeContracts.Intent) = intent {

@@ -1,26 +1,34 @@
 package uz.gita.otabek.data.repository.impl
 
-import android.util.Log
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import uz.gita.otabek.common.ErrorMessage
 import uz.gita.otabek.common.request.CardRequest
 import uz.gita.otabek.common.response.CardResponse
 import uz.gita.otabek.data.local.LocalStorage
+import uz.gita.otabek.data.local.room.CardDataBase
 import uz.gita.otabek.data.network.CardApi
 import uz.gita.otabek.data.repository.CardRepository
 import javax.inject.Inject
 
 class CardRepositoryImpl @Inject constructor(
-    private val api: CardApi, private val storage: LocalStorage
+    private val api: CardApi, private val storage: LocalStorage,
+    private val dataBase: CardDataBase
 ) : CardRepository {
     private val gson = Gson()
 
-    override fun getCards(): Flow<Result<CardResponse.GetCards>> = flow {
+    override fun getCards(): Flow<Result<List<CardResponse.CardItem>>> = flow {
+        val list = dataBase.cardDao().getAllCards()
+        emit(Result.success(list))
+        delay(5000)
         val result = api.getCards()
         if (result.isSuccessful && result.body() != null) {
-            emit(Result.success(result.body()?:CardResponse.GetCards))
+            emit(Result.success(result.body()!!))
+            dataBase.cardDao().insertCards(result.body()!!)
         } else if (result.errorBody() != null) {
             val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
 //            emit(Result.failure(Exception(error.message)))
@@ -28,7 +36,7 @@ class CardRepositoryImpl @Inject constructor(
         } else {
             emit(Result.failure(Throwable(result.message())))
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     override fun addCard(data: CardRequest.AddCard): Flow<Result<Unit>> = flow {
         val result = api.addCard(data)

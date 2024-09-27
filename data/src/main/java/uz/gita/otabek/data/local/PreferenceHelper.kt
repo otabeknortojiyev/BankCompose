@@ -3,11 +3,27 @@ package uz.gita.otabek.data.local
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import com.google.gson.GsonBuilder
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 abstract class SharedPreference(context: Context, preferences: SharedPreferences? = null) {
     private val pref = preferences ?: context.getSharedPreferences(javaClass.canonicalName, Context.MODE_PRIVATE)
+    protected val gson = GsonBuilder().create()
+
+    inner class objects<T>(val clazz: Class<T>, private val init: T? = null) : ReadWriteProperty<Any, T?> {
+        override fun getValue(thisRef: Any, property: KProperty<*>): T? {
+            val json = pref.getString(property.name, null) ?: return init
+            return gson.fromJson(json, clazz)
+        }
+
+        override fun setValue(thisRef: Any, property: KProperty<*>, value: T?) = pref.edit {
+            putString(property.name, value?.let {
+                gson.toJson(it)
+            }).apply()
+        }
+    }
+
 
     inner class booleans(private val init: Boolean = false) :
         ReadWriteProperty<Any, Boolean> {
@@ -36,5 +52,4 @@ abstract class SharedPreference(context: Context, preferences: SharedPreferences
         override fun setValue(thisRef: Any, property: KProperty<*>, value: String?) =
             value?.run { pref.edit { putString(property.name, value).apply() } } ?: Unit
     }
-
 }

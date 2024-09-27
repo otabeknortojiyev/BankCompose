@@ -13,7 +13,7 @@ import uz.gita.otabek.common.response.CardResponse
 interface CardApi {
 
     @GET("v1/card")
-    suspend fun getCards(): Response<CardResponse.GetCards>
+    suspend fun getCards(): Response<List<CardResponse.CardItem>>
 
     @POST("v1/card")
     suspend fun addCard(@Body data: CardRequest.AddCard): Response<CardResponse.AddCard>

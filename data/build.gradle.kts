@@ -57,5 +57,10 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
+    //ROOM
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+
     implementation(project(":common"))
+
 }

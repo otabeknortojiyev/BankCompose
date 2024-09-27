@@ -9,6 +9,8 @@ import uz.gita.otabek.bankauthcompose.screens.addCard.AddCardDirections
 import uz.gita.otabek.bankauthcompose.screens.language.LanguageDirections
 import uz.gita.otabek.bankauthcompose.screens.monitoring.MonitoringDirections
 import uz.gita.otabek.bankauthcompose.screens.password.PasswordDirections
+import uz.gita.otabek.bankauthcompose.screens.signIn.SignInDirections
+import uz.gita.otabek.bankauthcompose.screens.signInVerify.SignInVerifyDirections
 import uz.gita.otabek.bankauthcompose.screens.signUp.SignUpDirections
 import uz.gita.otabek.bankauthcompose.screens.signUpVerify.SignUpVerifyDirections
 import uz.gita.otabek.bankauthcompose.screens.splash.SplashDirections
@@ -17,6 +19,8 @@ import uz.gita.otabek.presenter.addCard.AddCardContract
 import uz.gita.otabek.presenter.language.LanguageContract
 import uz.gita.otabek.presenter.monitoring.MonitoringContract
 import uz.gita.otabek.presenter.password.PasswordContract
+import uz.gita.otabek.presenter.signIn.SignInContract
+import uz.gita.otabek.presenter.signInVerify.SignInVerifyContract
 import uz.gita.otabek.presenter.signUp.SignUpContract
 import uz.gita.otabek.presenter.signUpVerify.SignUpVerifyContract
 import uz.gita.otabek.presenter.splash.SplashContract
@@ -49,4 +53,10 @@ interface DirectionModule {
 
     @[Binds ViewModelScoped]
     fun bindAddCardDirection(impl: AddCardDirections): AddCardContract.Directions
+
+    @[Binds ViewModelScoped]
+    fun bindSignInDirection(impl: SignInDirections): SignInContract.Directions
+
+    @[Binds ViewModelScoped]
+    fun bindSignInVerifyDirection(impl: SignInVerifyDirections): SignInVerifyContract.Directions
 }

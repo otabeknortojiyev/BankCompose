@@ -10,4 +10,5 @@ interface HomeRepository {
     fun fullInfo(): Flow<Result<HomeResponse.FullInfo>>
     fun updateInfo(data: HomeRequest.UpdateInfo): Flow<Result<HomeResponse.UpdateInfo>>
     fun lastTransfers(): Flow<Result<HomeResponse.LastTransfers>>
+    fun totalBalanceFromStorage(): Int
 }

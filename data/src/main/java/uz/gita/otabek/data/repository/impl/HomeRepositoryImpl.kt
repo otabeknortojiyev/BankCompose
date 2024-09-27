@@ -1,6 +1,7 @@
 package uz.gita.otabek.data.repository.impl
 
 import com.google.gson.Gson
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import uz.gita.otabek.common.ErrorMessage
@@ -16,9 +17,12 @@ class HomeRepositoryImpl @Inject constructor(
 ) : HomeRepository {
     private val gson = Gson()
     override fun totalBalance(): Flow<Result<HomeResponse.TotalBalance>> = flow {
+        emit(Result.success(HomeResponse.TotalBalance(storage.totalBalance)))
+        delay(10000)
         val result = api.totalBalance()
         if (result.isSuccessful && result.body() != null) {
             emit(Result.success(HomeResponse.TotalBalance(result.body()!!.totalBalance)))
+            storage.totalBalance = result.body()!!.totalBalance
         } else if (result.errorBody() != null) {
             val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
 //            emit(Result.failure(Exception(error.message)))
@@ -82,4 +86,6 @@ class HomeRepositoryImpl @Inject constructor(
             emit(Result.failure(Throwable(result.message())))
         }
     }
+
+    override fun totalBalanceFromStorage(): Int = storage.totalBalance
 }

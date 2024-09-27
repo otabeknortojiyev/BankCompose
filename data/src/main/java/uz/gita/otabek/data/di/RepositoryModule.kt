@@ -1,13 +1,9 @@
 package uz.gita.otabek.data.di
 
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import uz.gita.otabek.data.local.LocalStorage
-import uz.gita.otabek.data.network.AuthApi
-import uz.gita.otabek.data.network.CardApi
-import uz.gita.otabek.data.network.HomeApi
 import uz.gita.otabek.data.repository.AuthRepository
 import uz.gita.otabek.data.repository.CardRepository
 import uz.gita.otabek.data.repository.HomeRepository
@@ -18,14 +14,14 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RepositoryModule {
+interface RepositoryModule {
 
-    @[Provides Singleton]
-    fun provideAuthRepository(api: AuthApi, localStorage: LocalStorage): AuthRepository = AuthRepositoryImpl(api, localStorage)
+    @[Binds Singleton]
+    fun provideAuthRepository(impl: AuthRepositoryImpl): AuthRepository
 
-    @[Provides Singleton]
-    fun provideHomeRepository(api: HomeApi, localStorage: LocalStorage): HomeRepository = HomeRepositoryImpl(api, localStorage)
+    @[Binds Singleton]
+    fun provideHomeRepository(impl: HomeRepositoryImpl): HomeRepository
 
-    @[Provides Singleton]
-    fun provideCardRepository(api: CardApi, localStorage: LocalStorage): CardRepository = CardRepositoryImpl(api, localStorage)
+    @[Binds Singleton]
+    fun provideCardRepository(impl: CardRepositoryImpl): CardRepository
 }

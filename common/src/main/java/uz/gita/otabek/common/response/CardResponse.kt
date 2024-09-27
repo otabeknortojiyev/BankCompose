@@ -1,14 +1,15 @@
 package uz.gita.otabek.common.response
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+
 
 sealed interface CardResponse {
 
-    data object GetCards : ArrayList<CardItem>(), CardResponse {
-        private fun readResolve(): Any = GetCards
-    }
-
+    @Entity("cards")
     data class CardItem(
+        @PrimaryKey(autoGenerate = true)
         val id: Int,
         val name: String,
         val amount: Int,

@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
     alias(libs.plugins.jetbrains.kotlin.jvm)
+    id("kotlin-kapt")
 }
 
 java {
@@ -12,4 +13,9 @@ dependencies{
 
     //Gson
     implementation(libs.gson)
+
+    //ROOM
+//    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.common)
+    kapt(libs.androidx.room.compiler)
 }

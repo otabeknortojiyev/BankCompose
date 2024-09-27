@@ -23,6 +23,7 @@ loggingInterceptor = "5.0.0-alpha.3"
 material = "1.7.1"
 retrofit = "2.11.0"
 retrofit2KotlinCoroutinesAdapter = "0.9.2"
+roomRuntime = "2.6.1"
 voyagerBottomSheetNavigator = "1.1.0-beta02"
 voyagerTabNavigator = "1.1.0-beta02"
 voyagerVersion = "1.1.0-beta02"
@@ -34,10 +35,13 @@ orbitTest = "4.3.2"
 orbitViewmodel = "4.3.2"
 jetbrainsKotlinJvm = "1.9.25"
 constraintlayoutCore = "1.0.4"
+roomCommon = "2.6.1"
 
 [libraries]
 #noinspection SimilarGradleDependency
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 gson-v288 = { module = "com.google.code.gson:gson", version.ref = "gsonVersion" }
 orbit-compose = { module = "org.orbit-mvi:orbit-compose", version.ref = "orbitCompose" }
 orbit-core = { module = "org.orbit-mvi:orbit-core", version.ref = "orbitCore" }
@@ -79,6 +83,7 @@ voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", 
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyagerVersion" }
 material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 androidx-constraintlayout-core = { group = "androidx.constraintlayout", name = "constraintlayout-core", version.ref = "constraintlayoutCore" }
+androidx-room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
