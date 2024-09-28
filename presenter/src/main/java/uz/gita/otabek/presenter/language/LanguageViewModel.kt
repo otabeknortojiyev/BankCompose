@@ -1,7 +1,9 @@
 package uz.gita.otabek.presenter.language
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.otabek.domain.useCase.auth.SetLanguageUseCase
@@ -19,7 +21,9 @@ class LanguageViewModel @Inject constructor(
             }
 
             is LanguageContract.Intent.SetLanguage -> {
-                setLanguageUseCase(intent.lang)
+                viewModelScope.launch {
+                    setLanguageUseCase(intent.lang)
+                }
             }
         }
     }

@@ -6,5 +6,5 @@ import uz.gita.otabek.domain.useCase.transfer.GetHistoryUseCase
 import javax.inject.Inject
 
 class GetHistoryUseCaseImpl @Inject constructor(private val transferRepository: TransferRepository) : GetHistoryUseCase {
-    override fun invoke(data: TransferRequest.GetHistory) = transferRepository.getHistory(data)
+    override suspend fun invoke(data: TransferRequest.GetHistory) = transferRepository.getHistory(data)
 }

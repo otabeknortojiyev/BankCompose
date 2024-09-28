@@ -1,19 +1,18 @@
 package uz.gita.otabek.data.repository
 
-import kotlinx.coroutines.flow.Flow
 import uz.gita.otabek.common.request.AuthRequest
 
 interface AuthRepository {
-    fun signUp(data: AuthRequest.SignUp): Flow<Result<Unit>>
-    fun signUpVerify(code: String): Flow<Result<Unit>>
-    fun signIn(data: AuthRequest.SignIn): Flow<Result<Unit>>
-    fun signInVerify(code:String): Flow<Result<Unit>>
-    fun updateToken(data: AuthRequest.UpdateToken): Flow<Result<Unit>>
-    fun signUpResend(): Flow<Result<Unit>>
-    fun signInResend(): Flow<Result<Unit>>
-    fun savePIN(pin: String)
-    fun checkPIN(): Boolean
-    fun getPIN(): String
-    fun setLanguage(lang: String)
-    fun checkLanguage(): String
+    suspend fun signUp(data: AuthRequest.SignUp): Result<Unit>
+    suspend fun signUpVerify(code: String): Result<Unit>
+    suspend fun signIn(data: AuthRequest.SignIn): Result<Unit>
+    suspend fun signInVerify(code: String): Result<Unit>
+    suspend fun updateToken(data: AuthRequest.UpdateToken): Result<Unit>
+    suspend fun signUpResend(): Result<Unit>
+    suspend fun signInResend(): Result<Unit>
+    suspend fun savePIN(pin: String): Result<Unit>
+    suspend fun checkPIN(): Result<Boolean>
+    suspend fun getPIN(): Result<String>
+    suspend fun setLanguage(lang: String): Result<Unit>
+    suspend fun checkLanguage(): Result<String>
 }

@@ -3,6 +3,7 @@ package uz.gita.otabek.bankauthcompose.screens.signInVerify
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +24,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
@@ -81,15 +83,20 @@ private fun SignInVerifyScreenContent(
         val guidLine4 = createGuidelineFromTop(0.4f)
         val guidLine45 = createGuidelineFromTop(0.45f)
         val guidLine9 = createGuidelineFromTop(0.9f)
-        Image(
-            painter = painterResource(id = R.drawable.arrow_left), contentDescription = null,
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp)
-                .clip(shape = RoundedCornerShape(20.dp))
-                .clickable {
-                    onEventDispatcher(SignInVerifyContract.Intent.MoveToSignIn)
-                },
-        )
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            Image(
+                painter = painterResource(id = R.drawable.arrow_left),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .clip(shape = RoundedCornerShape(10.dp))
+                    .clickable {
+                        onEventDispatcher(SignInVerifyContract.Intent.MoveToSignIn)
+
+                    }
+                    .padding(16.dp),
+            )
+        }
         Text(
             text = stringResource(id = R.string.sign_in_screen_title), modifier = Modifier
                 .padding(start = 20.dp)
@@ -222,7 +229,7 @@ private fun SignInVerifyScreenContent(
 
         if (timeLeft == 0) {
             Text(text = stringResource(id = R.string.sign_up_verify_screen_resend_text3),
-                color = Color.Blue,
+                color = MainGreen,
                 fontFamily = FontFamily(Font(R.font.montserrat_medium)),
                 fontSize = 20.sp,
                 modifier = Modifier

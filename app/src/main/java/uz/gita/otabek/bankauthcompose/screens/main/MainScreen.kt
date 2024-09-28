@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -103,8 +102,7 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
                 contentDescription = tab.options.title,
             )
             Text(
-                text = tab.options.title,
-                style = TextStyle(color = MainGreen, fontFamily = FontFamily(Font(R.font.montserrat_light)), fontSize = 12.sp)
+                text = tab.options.title, color = MainGreen, fontFamily = FontFamily(Font(R.font.montserrat_light)), fontSize = 12.sp
             )
         }
     } else {
@@ -140,8 +138,7 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
                 contentDescription = tab.options.title,
             )
             Text(
-                text = tab.options.title,
-                style = TextStyle(color = Color.LightGray, fontFamily = FontFamily(Font(R.font.montserrat_light)), fontSize = 12.sp)
+                text = tab.options.title, color = Color.LightGray, fontFamily = FontFamily(Font(R.font.montserrat_light)), fontSize = 12.sp
             )
         }
     }

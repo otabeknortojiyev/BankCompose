@@ -1,5 +1,6 @@
 package uz.gita.otabek.domain.useCase.auth
 
+
 interface CheckLanguageUseCase {
-    operator fun invoke(): String
+    suspend operator fun invoke(): Result<String>
 }

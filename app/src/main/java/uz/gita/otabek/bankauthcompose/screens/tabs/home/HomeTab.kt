@@ -40,7 +40,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -87,16 +86,13 @@ object HomeTab : Tab {
 private fun HomeScreenContent(
     uiState: State<HomeContracts.UiState>, onEventDispatcher: (HomeContracts.Intent) -> Unit
 ) {
-    val pullRefreshState = rememberPullRefreshState(
-        refreshing = uiState.value.isLoading,
-        onRefresh = { onEventDispatcher(HomeContracts.Intent.GetInitData) }
-    )
     LaunchedEffect(Unit) { onEventDispatcher(HomeContracts.Intent.GetInitData) }
+
+    val pullRefreshState =
+        rememberPullRefreshState(refreshing = uiState.value.isLoading, onRefresh = { onEventDispatcher(HomeContracts.Intent.GetInitData) })
     var isHidden by remember { mutableStateOf(false) }
     val animatedBalance by animateIntAsState(
-        targetValue = uiState.value.balance,
-        label = "",
-        animationSpec = tween(durationMillis = 3000, easing = LinearOutSlowInEasing)
+        targetValue = uiState.value.balance, label = "", animationSpec = tween(durationMillis = 3000, easing = LinearOutSlowInEasing)
     )
     Surface(
         modifier = Modifier
@@ -115,7 +111,9 @@ private fun HomeScreenContent(
                         Image(painter = painterResource(id = R.drawable.user_circle), contentDescription = null)
                         Text(
                             text = uiState.value.name.uppercase(),
-                            style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 20.sp),
+                            color = Color.Black,
+                            fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                            fontSize = 20.sp,
                             modifier = Modifier.padding(start = 4.dp)
                         )
                     }
@@ -123,7 +121,9 @@ private fun HomeScreenContent(
                 item {
                     Text(
                         text = stringResource(id = R.string.home_screen_over_all_balance),
-                        style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_regular)), fontSize = 16.sp),
+                        color = Color.Black,
+                        fontFamily = FontFamily(Font(R.font.montserrat_regular)),
+                        fontSize = 16.sp,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 24.dp),
@@ -152,11 +152,13 @@ private fun HomeScreenContent(
                                     "* * * * * * *"
                                 } else {
                                     animatedBalance.toString().formatNumberWithSpaces()
-                                }, style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold))), fontSize = 28.sp
+                                }, color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 28.sp
                             )
                             Text(
                                 text = if (isHidden) "" else stringResource(id = R.string.home_screen_sum),
-                                style = TextStyle(fontSize = 24.sp, color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_regular))),
+                                fontSize = 24.sp,
+                                color = Color.Black,
+                                fontFamily = FontFamily(Font(R.font.montserrat_regular)),
                                 modifier = Modifier.padding(start = 10.dp)
                             )
                         }
@@ -221,12 +223,14 @@ private fun HomeScreenContent(
                     ) {
                         Text(
                             text = stringResource(id = R.string.home_screen_card),
-                            style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold))),
+                            color = Color.Black,
+                            fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                             fontSize = 20.sp,
                             modifier = Modifier.padding(start = 16.dp)
                         )
                         Text(text = stringResource(id = R.string.home_screen_show_all),
-                            style = TextStyle(color = MainGreen, fontFamily = FontFamily(Font(R.font.montserrat_semibold))),
+                            color = MainGreen,
+                            fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                             fontSize = 16.sp,
                             modifier = Modifier
                                 .clip(shape = RoundedCornerShape(10.dp))
@@ -250,7 +254,8 @@ private fun HomeScreenContent(
                                     .padding(start = 20.dp, top = 20.dp, end = 20.dp)
                                     .fillMaxWidth()
                                     .align(alignment = Alignment.CenterHorizontally),
-                                style = TextStyle(fontSize = 20.sp, textAlign = TextAlign.Center)
+                                fontSize = 20.sp,
+                                textAlign = TextAlign.Center
                             )
                         } else {
                             for (i in 0 until uiState.value.cards.size) {
@@ -288,7 +293,9 @@ private fun HomeScreenContent(
                 }
                 item {
                     Text(text = stringResource(id = R.string.home_screen_monitoring),
-                        style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 20.sp),
+                        color = Color.Black,
+                        fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                        fontSize = 20.sp,
                         modifier = Modifier
                             .padding(start = 16.dp, end = 16.dp, top = 10.dp)
                             .fillMaxWidth()
@@ -310,7 +317,9 @@ private fun HomeScreenContent(
                         .background(gradient), contentAlignment = Alignment.CenterStart) {
                         Text(
                             text = stringResource(id = R.string.home_screen_free_transfers),
-                            style = TextStyle(color = Color.White, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 18.sp),
+                            color = Color.White,
+                            fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                            fontSize = 18.sp,
                             modifier = Modifier.padding(start = 20.dp, top = 20.dp, bottom = 20.dp)
                         )
                     }
@@ -325,10 +334,14 @@ private fun HomeScreenContent(
                     ) {
                         Text(
                             text = stringResource(id = R.string.home_screen_exchange_in_app),
-                            style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 20.sp)
+                            color = Color.Black,
+                            fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                            fontSize = 20.sp
                         )
                         Text(text = stringResource(id = R.string.home_screen_exchange),
-                            style = TextStyle(color = MainGreen, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 16.sp),
+                            color = MainGreen,
+                            fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                            fontSize = 16.sp,
                             modifier = Modifier
                                 .clip(shape = RoundedCornerShape(10.dp))
                                 .clickable { }
@@ -347,39 +360,48 @@ private fun HomeScreenContent(
                             Text(
                                 textAlign = TextAlign.Center,
                                 text = stringResource(id = R.string.home_screen_currency),
-                                style = TextStyle(color = Color.Gray, fontFamily = FontFamily(Font(R.font.montserrat_light)))
+                                color = Color.Gray,
+                                fontFamily = FontFamily(Font(R.font.montserrat_light))
                             )
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(
                                 textAlign = TextAlign.Center,
                                 text = "$ USD",
-                                style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 20.sp)
+                                color = Color.Black,
+                                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                                fontSize = 20.sp
                             )
                         }
                         Column(modifier = Modifier.padding(20.dp)) {
                             Text(
                                 textAlign = TextAlign.Center,
                                 text = stringResource(id = R.string.home_screen_sell),
-                                style = TextStyle(color = Color.Gray, fontFamily = FontFamily(Font(R.font.montserrat_light)))
+                                color = Color.Gray,
+                                fontFamily = FontFamily(Font(R.font.montserrat_light))
                             )
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(
                                 textAlign = TextAlign.Center,
                                 text = "12 670",
-                                style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 20.sp)
+                                color = Color.Black,
+                                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                                fontSize = 20.sp
                             )
                         }
                         Column(modifier = Modifier.padding(20.dp)) {
                             Text(
                                 textAlign = TextAlign.Center,
                                 text = stringResource(id = R.string.home_screen_buy),
-                                style = TextStyle(color = Color.Gray, fontFamily = FontFamily(Font(R.font.montserrat_light)))
+                                color = Color.Gray,
+                                fontFamily = FontFamily(Font(R.font.montserrat_light))
                             )
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(
                                 textAlign = TextAlign.Center,
                                 text = "12 750",
-                                style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 20.sp)
+                                color = Color.Black,
+                                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                                fontSize = 20.sp
                             )
                         }
                     }
@@ -392,7 +414,9 @@ private fun HomeScreenContent(
                             .padding(start = 16.dp, end = 16.dp, top = 24.dp)
                     ) {
                         Text(text = stringResource(id = R.string.home_screen_bramches),
-                            style = TextStyle(color = Color.DarkGray, fontSize = 16.sp, fontFamily = FontFamily(Font(R.font.montserrat_semibold))),
+                            color = Color.DarkGray,
+                            fontSize = 16.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                             modifier = Modifier
                                 .padding(end = 4.dp)
                                 .clip(shape = RoundedCornerShape(12.dp))
@@ -402,7 +426,9 @@ private fun HomeScreenContent(
                                 .padding(vertical = 20.dp),
                             textAlign = TextAlign.Center)
                         Text(text = stringResource(id = R.string.home_screen_ATMs),
-                            style = TextStyle(color = Color.DarkGray, fontSize = 16.sp, fontFamily = FontFamily(Font(R.font.montserrat_semibold))),
+                            color = Color.DarkGray,
+                            fontSize = 16.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                             modifier = Modifier
                                 .padding(start = 4.dp)
                                 .clip(shape = RoundedCornerShape(12.dp))
@@ -449,18 +475,24 @@ fun Services(image: Int, text1: String, text2: String, text3: String, end: Dp) {
             ) {
                 Text(
                     text = text1,
-                    style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 12.sp),
+                    color = Color.Black,
+                    fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                    fontSize = 12.sp,
                     modifier = Modifier.padding(start = 10.dp)
                 )
                 Text(
                     text = text2,
-                    style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 12.sp),
+                    color = Color.Black,
+                    fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                    fontSize = 12.sp,
                     modifier = Modifier.padding(start = 10.dp)
                 )
             }
             Text(
                 text = text3,
-                style = TextStyle(color = Color.Gray, fontSize = 12.sp, fontFamily = FontFamily(Font(R.font.montserrat_light))),
+                color = Color.Gray,
+                fontSize = 12.sp,
+                fontFamily = FontFamily(Font(R.font.montserrat_light)),
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 10.dp)
@@ -472,9 +504,7 @@ fun Services(image: Int, text1: String, text2: String, text3: String, end: Dp) {
 @Composable
 fun MiniCards(type: Int, bottom: Dp, pan: String, balance: Int, isHidden: Boolean) {
     val animatedBalance by animateIntAsState(
-        targetValue = balance,
-        label = "",
-        animationSpec = tween(durationMillis = 3000, easing = LinearOutSlowInEasing)
+        targetValue = balance, label = "", animationSpec = tween(durationMillis = 3000, easing = LinearOutSlowInEasing)
     )
     Row(
         modifier = Modifier
@@ -497,7 +527,8 @@ fun MiniCards(type: Int, bottom: Dp, pan: String, balance: Int, isHidden: Boolea
         ) {
             Text(
                 text = pan,
-                style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold))),
+                color = Color.Black,
+                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                 modifier = Modifier.padding(bottom = 6.dp, start = 8.dp)
             )
             Image(painter = painterResource(id = if (type % 2 == 0) R.drawable.humo2 else R.drawable.uzcard), contentDescription = null)
@@ -510,17 +541,23 @@ fun MiniCards(type: Int, bottom: Dp, pan: String, balance: Int, isHidden: Boolea
             ) {
                 Text(
                     text = if (isHidden) "* * * * * * *" else animatedBalance.toString().formatNumberWithSpaces(),
-                    style = TextStyle(color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 20.sp)
+                    color = Color.Black,
+                    fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                    fontSize = 20.sp
                 )
                 Text(
                     text = if (isHidden) "" else stringResource(id = R.string.home_screen_sum),
-                    style = TextStyle(color = Color.DarkGray, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 16.sp),
+                    color = Color.DarkGray,
+                    fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                    fontSize = 16.sp,
                     modifier = Modifier.padding(start = 4.dp)
                 )
             }
             Text(
                 text = if (type % 2 == 0) "HUMO" else "UZCARD",
-                style = TextStyle(color = Color.Gray, fontFamily = FontFamily(Font(R.font.montserrat_regular)), fontSize = 12.sp)
+                color = Color.Gray,
+                fontFamily = FontFamily(Font(R.font.montserrat_regular)),
+                fontSize = 12.sp
             )
         }
     }

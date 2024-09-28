@@ -1,4 +1,4 @@
-package uz.gita.otabek.bankauthcompose.screens.password
+package uz.gita.otabek.bankauthcompose.screens.passwordVerify
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -42,23 +42,23 @@ import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.otabek.bankauthcompose.R
 import uz.gita.otabek.bankauthcompose.ui.theme.MainGreen
 import uz.gita.otabek.bankauthcompose.ui.theme.PasswordBackGroundGray
-import uz.gita.otabek.presenter.password.PasswordContract
-import uz.gita.otabek.presenter.password.PasswordViewModel
+import uz.gita.otabek.presenter.passwordVerify.PasswordVerifyContract
+import uz.gita.otabek.presenter.passwordVerify.PasswordVerifyViewModel
 
-object PasswordScreen : Screen {
-    private fun readResolve(): Any = PasswordScreen
+object PasswordVerifyScreen : Screen {
+    private fun readResolve(): Any = PasswordVerifyScreen
 
     @Composable
     override fun Content() {
-        val viewModel: PasswordContract.ViewModel = getViewModel<PasswordViewModel>()
+        val viewModel: PasswordVerifyContract.ViewModel = getViewModel<PasswordVerifyViewModel>()
         val uiState = viewModel.collectAsState()
-        PasswordScreenContent(uiState, viewModel::onEventDispatcher)
+        PasswordVerifyScreenContent(uiState, viewModel::onEventDispatcher)
     }
 }
 
 @Composable
-private fun PasswordScreenContent(
-    uiState: State<PasswordContract.UiState>, onEventDispatcher: (PasswordContract.Intent) -> Unit
+private fun PasswordVerifyScreenContent(
+    uiState: State<PasswordVerifyContract.UiState>, onEventDispatcher: (PasswordVerifyContract.Intent) -> Unit
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -69,19 +69,8 @@ private fun PasswordScreenContent(
             mutableIntStateOf(0)
         }
 
-        val pin1 = remember {
+        val pin = remember {
             mutableStateListOf<String>()
-        }
-        val pin2 = remember {
-            mutableStateListOf<String>()
-        }
-
-        val error = remember {
-            mutableStateOf(false)
-        }
-
-        val isRepeat = remember {
-            mutableStateOf(false)
         }
 
         val guidLine05 = createGuidelineFromTop(0.05f)
@@ -109,14 +98,12 @@ private fun PasswordScreenContent(
                 modifier = Modifier.padding(start = 4.dp)
             )
         }
-        Text(text = if (error.value) {
+        Text(text = if (uiState.value.error) {
             stringResource(id = R.string.password_screen_error_pin)
-        } else if (!error.value && isRepeat.value) {
-            stringResource(id = R.string.password_screen_repeat_pin)
         } else {
             stringResource(id = R.string.password_screen_enter_pin)
         },
-            color = if (error.value) {
+            color = if (uiState.value.error) {
                 Color.Red
             } else {
                 Color.Gray
@@ -165,25 +152,20 @@ private fun PasswordScreenContent(
                 }
 
                 4 -> {
-                    if (error.value) {
+                    if (uiState.value.error) {
                         PasswordRoundRed()
                         PasswordRoundRed()
                         PasswordRoundRed()
                         PasswordRoundRed()
-                    } else if (!error.value && !isRepeat.value) {
-                        isRepeat.value = true
-                        password.value = 0
-                    } else if (isRepeat.value && pin1.containsAll(pin2)) {
+                    } else {
                         PasswordRoundGreen()
                         PasswordRoundGreen()
                         PasswordRoundGreen()
                         PasswordRoundGreen()
                         LaunchedEffect(Unit) {
                             delay(500)
-                            onEventDispatcher(PasswordContract.Intent.MoveToHome(pin1[0] + pin1[1] + pin1[2] + pin1[3]))
+                            onEventDispatcher(PasswordVerifyContract.Intent.MoveToHome(pin[0] + pin[1] + pin[2] + pin[3]))
                         }
-                    } else {
-                        error.value = true
                     }
                 }
             }
@@ -202,31 +184,19 @@ private fun PasswordScreenContent(
                 PasswordScreenNumber(number = "1") {
                     if (password.intValue != 4) {
                         password.intValue++
-                        if (pin1.size != 4) {
-                            pin1.add("1")
-                        } else {
-                            pin2.add("1")
-                        }
+                        pin.add("1")
                     }
                 }
                 PasswordScreenNumber(number = "2") {
                     if (password.intValue != 4) {
                         password.intValue++
-                        if (pin1.size != 4) {
-                            pin1.add("2")
-                        } else {
-                            pin2.add("2")
-                        }
+                        pin.add("2")
                     }
                 }
                 PasswordScreenNumber(number = "3") {
                     if (password.intValue != 4) {
                         password.intValue++
-                        if (pin1.size != 4) {
-                            pin1.add("3")
-                        } else {
-                            pin2.add("3")
-                        }
+                        pin.add("3")
                     }
                 }
             }
@@ -238,31 +208,19 @@ private fun PasswordScreenContent(
                 PasswordScreenNumber(number = "4") {
                     if (password.intValue != 4) {
                         password.intValue++
-                        if (pin1.size != 4) {
-                            pin1.add("4")
-                        } else {
-                            pin2.add("4")
-                        }
+                        pin.add("4")
                     }
                 }
                 PasswordScreenNumber(number = "5") {
                     if (password.intValue != 4) {
                         password.intValue++
-                        if (pin1.size != 4) {
-                            pin1.add("5")
-                        } else {
-                            pin2.add("5")
-                        }
+                        pin.add("5")
                     }
                 }
                 PasswordScreenNumber(number = "6") {
                     if (password.intValue != 4) {
                         password.intValue++
-                        if (pin1.size != 4) {
-                            pin1.add("6")
-                        } else {
-                            pin2.add("6")
-                        }
+                        pin.add("6")
                     }
                 }
             }
@@ -274,31 +232,19 @@ private fun PasswordScreenContent(
                 PasswordScreenNumber(number = "7") {
                     if (password.intValue != 4) {
                         password.intValue++
-                        if (pin1.size != 4) {
-                            pin1.add("7")
-                        } else {
-                            pin2.add("7")
-                        }
+                        pin.add("7")
                     }
                 }
                 PasswordScreenNumber(number = "8") {
                     if (password.intValue != 4) {
                         password.intValue++
-                        if (pin1.size != 4) {
-                            pin1.add("8")
-                        } else {
-                            pin2.add("8")
-                        }
+                        pin.add("8")
                     }
                 }
                 PasswordScreenNumber(number = "9") {
                     if (password.intValue != 4) {
                         password.intValue++
-                        if (pin1.size != 4) {
-                            pin1.add("9")
-                        } else {
-                            pin2.add("9")
-                        }
+                        pin.add("9")
                     }
                 }
             }
@@ -311,24 +257,16 @@ private fun PasswordScreenContent(
                 PasswordScreenNumber(number = "0") {
                     if (password.intValue != 4) {
                         password.intValue++
-                        if (pin1.size != 4) {
-                            pin1.add("0")
-                        } else {
-                            pin2.add("0")
-                        }
+                        pin.add("0")
                     }
                 }
                 PasswordScreenNumberClear {
                     if (password.intValue != 0) {
                         password.intValue--
-                        if (pin2.isNotEmpty()) {
-                            pin2.removeAt(pin2.size - 1)
-                        } else {
-                            pin1.removeAt(pin1.size - 1)
-                        }
+                        pin.removeAt(pin.size - 1)
                     }
                     if (password.intValue == 0 || password.intValue == 1 || password.intValue == 2 || password.intValue == 3) {
-                        error.value = false
+                        uiState.value.error = false
                     }
                 }
             }

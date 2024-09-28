@@ -5,5 +5,5 @@ import uz.gita.otabek.common.request.HomeRequest
 import uz.gita.otabek.common.response.HomeResponse
 
 interface UpdateInfoUseCase {
-    operator fun invoke(data: HomeRequest.UpdateInfo): Flow<Result<HomeResponse.UpdateInfo>>
+    suspend operator fun invoke(data: HomeRequest.UpdateInfo): Result<HomeResponse.UpdateInfo>
 }

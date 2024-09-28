@@ -19,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -51,11 +50,12 @@ object SplashScreen : Screen {
 @SuppressLint("ResourceAsColor")
 @Composable
 private fun SplashScreenContent(
-    uiState: State<SplashContract.UiState>,
-    onEventDispatcher: (SplashContract.Intent) -> Unit
+    uiState: State<SplashContract.UiState>, onEventDispatcher: (SplashContract.Intent) -> Unit
 ) {
     val context = LocalContext.current
-    onEventDispatcher(SplashContract.Intent.CheckLanguage)
+    LaunchedEffect(Unit) {
+        onEventDispatcher(SplashContract.Intent.CheckLanguage)
+    }
     when (uiState.value.language) {
         "uz" -> {
             setLanguage(language = Lang.uz, context)
@@ -92,9 +92,11 @@ private fun SplashScreenContent(
         ) {
             letters.forEach {
                 Text(
-                    text = it, style = TextStyle(
-                        color = MainGreen, fontSize = 36.sp, fontFamily = FontFamily(Font(R.font.archivo_black))
-                    ), modifier = Modifier
+                    text = it,
+                    color = MainGreen,
+                    fontSize = 36.sp,
+                    fontFamily = FontFamily(Font(R.font.archivo_black)),
+                    modifier = Modifier
                         .weight(1f)
                         .padding(10.dp)
                         .scale(scale.value)

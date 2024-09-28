@@ -79,19 +79,15 @@ private fun AddCardScreenContent(
             .background(color = PasswordBackGroundGray)
     ) {
         if (uiState.value.success) {
-            AlertDialog(
-                onDismissRequest = {},
-                title = {
-                    Text(text = "Успешно", fontSize = 20.sp, fontFamily = FontFamily(Font(R.font.montserrat_regular)))
-                }, confirmButton = {
-                    Button(
-                        onClick = {
-                            onEventDispatcher(AddCardContract.Intent.CloseDialog)
-                        }
-                    ) {
-                        Text(text = "OK")
-                    }
-                })
+            AlertDialog(onDismissRequest = {}, title = {
+                Text(text = "Успешно", fontSize = 20.sp, fontFamily = FontFamily(Font(R.font.montserrat_regular)))
+            }, confirmButton = {
+                Button(onClick = {
+                    onEventDispatcher(AddCardContract.Intent.CloseDialog)
+                }) {
+                    Text(text = "OK")
+                }
+            })
         }
         Box(
             modifier = Modifier.fillMaxWidth()
@@ -136,7 +132,9 @@ private fun AddCardScreenContent(
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = stringResource(id = R.string.add_card_screen_enter_card_number),
-            style = TextStyle(color = Grey, fontFamily = FontFamily(Font(R.font.montserrat_light)), fontSize = 20.sp),
+            color = Grey,
+            fontFamily = FontFamily(Font(R.font.montserrat_light)),
+            fontSize = 20.sp,
             modifier = Modifier.padding(horizontal = 20.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
@@ -161,7 +159,9 @@ private fun AddCardScreenContent(
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = stringResource(id = R.string.add_card_screen_enter_card_year),
-            style = TextStyle(color = Grey, fontFamily = FontFamily(Font(R.font.montserrat_light)), fontSize = 20.sp),
+            color = Grey,
+            fontFamily = FontFamily(Font(R.font.montserrat_light)),
+            fontSize = 20.sp,
             modifier = Modifier.padding(horizontal = 20.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
@@ -182,7 +182,9 @@ private fun AddCardScreenContent(
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = stringResource(id = R.string.add_card_screen_enter_card_month),
-            style = TextStyle(color = Grey, fontFamily = FontFamily(Font(R.font.montserrat_light)), fontSize = 20.sp),
+            color = Grey,
+            fontFamily = FontFamily(Font(R.font.montserrat_light)),
+            fontSize = 20.sp,
             modifier = Modifier.padding(horizontal = 20.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
@@ -203,7 +205,9 @@ private fun AddCardScreenContent(
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = stringResource(id = R.string.add_card_screen_enter_card_name),
-            style = TextStyle(color = Grey, fontFamily = FontFamily(Font(R.font.montserrat_light)), fontSize = 20.sp),
+            color = Grey,
+            fontFamily = FontFamily(Font(R.font.montserrat_light)),
+            fontSize = 20.sp,
             modifier = Modifier.padding(horizontal = 20.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
@@ -220,10 +224,9 @@ private fun AddCardScreenContent(
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text, imeAction = ImeAction.Done)
         )
         Spacer(modifier = Modifier.weight(1f))
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
+        Card(modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
             shape = RoundedCornerShape(10.dp),
             colors = CardDefaults.cardColors(MainGreen),
             elevation = CardDefaults.elevatedCardElevation(defaultElevation = 2.dp),
@@ -232,10 +235,7 @@ private fun AddCardScreenContent(
                     onEventDispatcher(
                         AddCardContract.Intent.AddCard(
                             CardRequest.AddCard(
-                                cardPan.value,
-                                cardYear.value,
-                                cardMonth.value,
-                                cardName.value
+                                cardPan.value, cardYear.value, cardMonth.value, cardName.value
                             )
                         )
                     )
@@ -244,8 +244,7 @@ private fun AddCardScreenContent(
             if (uiState.value.isLoading) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
                     CircularLoading(
-                        modifier = Modifier
-                            .padding(20.dp)
+                        modifier = Modifier.padding(20.dp)
                     )
                 }
             } else {

@@ -6,5 +6,5 @@ import uz.gita.otabek.domain.useCase.auth.SignUpResendUseCase
 import javax.inject.Inject
 
 class SignUpResendUseCaseImpl @Inject constructor(private val authRepository: AuthRepository) : SignUpResendUseCase {
-    override fun invoke() = authRepository.signUpResend()
+    override suspend fun invoke() = authRepository.signUpResend()
 }

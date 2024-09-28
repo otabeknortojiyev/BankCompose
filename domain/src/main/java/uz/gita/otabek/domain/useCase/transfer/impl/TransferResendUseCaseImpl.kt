@@ -6,5 +6,5 @@ import uz.gita.otabek.domain.useCase.transfer.TransferResendUseCase
 import javax.inject.Inject
 
 class TransferResendUseCaseImpl @Inject constructor(private val transferRepository: TransferRepository) : TransferResendUseCase {
-    override fun invoke(data: TransferRequest.TransferResend) = transferRepository.transferResend(data)
+    override suspend fun invoke(data: TransferRequest.TransferResend) = transferRepository.transferResend(data)
 }

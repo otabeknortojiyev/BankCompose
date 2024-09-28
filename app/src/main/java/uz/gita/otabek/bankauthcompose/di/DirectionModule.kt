@@ -9,6 +9,7 @@ import uz.gita.otabek.bankauthcompose.screens.addCard.AddCardDirections
 import uz.gita.otabek.bankauthcompose.screens.language.LanguageDirections
 import uz.gita.otabek.bankauthcompose.screens.monitoring.MonitoringDirections
 import uz.gita.otabek.bankauthcompose.screens.password.PasswordDirections
+import uz.gita.otabek.bankauthcompose.screens.passwordVerify.PasswordVerifyDirections
 import uz.gita.otabek.bankauthcompose.screens.signIn.SignInDirections
 import uz.gita.otabek.bankauthcompose.screens.signInVerify.SignInVerifyDirections
 import uz.gita.otabek.bankauthcompose.screens.signUp.SignUpDirections
@@ -19,6 +20,7 @@ import uz.gita.otabek.presenter.addCard.AddCardContract
 import uz.gita.otabek.presenter.language.LanguageContract
 import uz.gita.otabek.presenter.monitoring.MonitoringContract
 import uz.gita.otabek.presenter.password.PasswordContract
+import uz.gita.otabek.presenter.passwordVerify.PasswordVerifyContract
 import uz.gita.otabek.presenter.signIn.SignInContract
 import uz.gita.otabek.presenter.signInVerify.SignInVerifyContract
 import uz.gita.otabek.presenter.signUp.SignUpContract
@@ -41,6 +43,9 @@ interface DirectionModule {
 
     @[Binds ViewModelScoped]
     fun bindCodeDirection(impl: SignUpVerifyDirections): SignUpVerifyContract.Directions
+
+    @[Binds ViewModelScoped]
+    fun bindPasswordVerifyDirection(impl: PasswordVerifyDirections): PasswordVerifyContract.Directions
 
     @[Binds ViewModelScoped]
     fun bindPasswordDirection(impl: PasswordDirections): PasswordContract.Directions

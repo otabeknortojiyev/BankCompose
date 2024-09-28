@@ -1,14 +1,15 @@
-package uz.gita.otabek.presenter.password
+package uz.gita.otabek.presenter.passwordVerify
 
 import org.orbitmvi.orbit.ContainerHost
 
-interface PasswordContract {
+interface PasswordVerifyContract {
     interface ViewModel : ContainerHost<UiState, SideEffect> {
         fun onEventDispatcher(intent: Intent)
     }
 
     data class UiState(
-        val isLoading: Boolean = false
+        val isLoading: Boolean = false,
+        var error: Boolean = false
     )
 
     sealed interface SideEffect {

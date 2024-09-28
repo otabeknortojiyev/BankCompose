@@ -6,5 +6,5 @@ import uz.gita.otabek.domain.useCase.card.DeleteCardUseCase
 import javax.inject.Inject
 
 class DeleteCardUseCaseImpl @Inject constructor(private val cardRepository: CardRepository) : DeleteCardUseCase {
-    override fun invoke(data: CardRequest.DeleteCard) = cardRepository.deleteCard(data)
+    override suspend fun invoke(data: CardRequest.DeleteCard) = cardRepository.deleteCard(data)
 }

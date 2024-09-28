@@ -64,8 +64,7 @@ private fun MonitoringScreenContent(
         Box(
             modifier = Modifier.fillMaxWidth()
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.arrow_left),
+            Image(painter = painterResource(id = R.drawable.arrow_left),
                 contentDescription = null,
                 modifier = Modifier
                     .align(alignment = Alignment.CenterStart)
@@ -73,8 +72,7 @@ private fun MonitoringScreenContent(
                     .clickable {
                         onEventDispatcher(MonitoringContract.Intent.MoveToHome)
                     }
-                    .padding(16.dp)
-            )
+                    .padding(16.dp))
             Text(
                 text = stringResource(id = R.string.home_screen_monitoring),
                 modifier = Modifier
@@ -134,11 +132,7 @@ fun Transfer(item: HomeResponse.TransferItem) {
                 item.from
             } else {
                 item.from
-            },
-            fontFamily = FontFamily(Font(R.font.montserrat_light)),
-            color = Color.Black,
-            fontSize = 20.sp,
-            modifier = Modifier.weight(1f)
+            }, fontFamily = FontFamily(Font(R.font.montserrat_light)), color = Color.Black, fontSize = 20.sp, modifier = Modifier.weight(1f)
         )
 
         val timeInMillis: Long = item.time

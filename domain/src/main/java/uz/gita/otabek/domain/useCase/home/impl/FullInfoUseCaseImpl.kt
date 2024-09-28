@@ -5,5 +5,5 @@ import uz.gita.otabek.domain.useCase.home.FullInfoUseCase
 import javax.inject.Inject
 
 class FullInfoUseCaseImpl @Inject constructor(private val homeRepository: HomeRepository) : FullInfoUseCase {
-    override fun invoke() = homeRepository.fullInfo()
+    override suspend fun invoke() = homeRepository.fullInfo()
 }

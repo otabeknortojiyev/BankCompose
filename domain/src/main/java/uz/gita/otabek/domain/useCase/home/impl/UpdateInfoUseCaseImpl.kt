@@ -6,5 +6,5 @@ import uz.gita.otabek.domain.useCase.home.UpdateInfoUseCase
 import javax.inject.Inject
 
 class UpdateInfoUseCaseImpl @Inject constructor(private val homeRepository: HomeRepository) : UpdateInfoUseCase {
-    override fun invoke(data: HomeRequest.UpdateInfo) = homeRepository.updateInfo(data)
+    override suspend fun invoke(data: HomeRequest.UpdateInfo) = homeRepository.updateInfo(data)
 }

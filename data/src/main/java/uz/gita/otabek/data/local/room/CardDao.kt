@@ -1,4 +1,4 @@
-package uz.gita.otabek.dictionaryapp.room
+package uz.gita.otabek.data.local.room
 
 import androidx.room.Dao
 import androidx.room.Insert

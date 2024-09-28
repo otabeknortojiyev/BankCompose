@@ -5,5 +5,5 @@ import uz.gita.otabek.domain.useCase.card.GetCardsUseCase
 import javax.inject.Inject
 
 class GetCardsUseCaseImpl @Inject constructor(private val cardRepository: CardRepository) : GetCardsUseCase {
-    override fun invoke() = cardRepository.getCards()
+    override suspend fun invoke() = cardRepository.getCards()
 }

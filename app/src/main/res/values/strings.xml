@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">BankAuthCompose</string>
     <string name="sign_up_screen_registration">Регистрация</string>
+    <string name="sign_up_screen_already_exist">Уже есть аккаунт? </string>
+    <string name="sign_up_screen_already_exist_enter">Войти</string>
     <string name="sign_up_screen_phone_number">Введите свой номер телефона</string>
     <string name="sign_up_screen_phone_number_error">Номер должен состоять из 12 цифр</string>
     <string name="sign_up_screen_name">Введите имя</string>
@@ -12,16 +14,19 @@
     <string name="sign_up_screen_continue">Продолжить</string>
 
     <string name="sign_in_screen_title">Вход</string>
+    <string name="sign_in_screen_enter_password">Введите пароль</string>
 
     <string name="sign_up_verify_screen_registration">Регистрация</string>
     <string name="sign_up_verify_screen_phone">Введите код отправленный на номер</string>
-    <string name="sign_up_verify_screen_resend_text1">Повторная отправка кода через </string>
+    <string name="sign_up_verify_screen_resend_text1">Повторная отправка кода через  </string>
     <string name="sign_up_verify_screen_resend_text2"> секунд</string>
-    <string name="sign_up_verify_screen_resend_text3">Повторная отправка</string>
+    <string name="sign_up_verify_screen_resend_text3">"Повторная отправка "</string>
     <string name="sign_up_verify_screen_continue">Далее</string>
 
     <string name="password_screen_enter_pin">Введите ПИН-код</string>
+    <string name="password_screen_repeat_pin">Повторите ПИН-код</string>
     <string name="password_screen_error_pin">ПИН-код введён неверно</string>
+    <string name="password_screen_pin_not_match">ПИН-код не совпадает</string>
 
     <string name="home_screen_sum">сум</string>
     <string name="home_screen_ATMs">Банкоматы</string>

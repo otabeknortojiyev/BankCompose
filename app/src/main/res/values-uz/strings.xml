@@ -13,10 +13,10 @@
     <string name="sign_up_screen_born_date_error">Sana formati noto‘g‘ri</string>
     <string name="sign_up_verify_screen_registration">Roʻyxatdan oʻtish</string>
     <string name="sign_up_verify_screen_phone">Quyidagi raqamga yuborilgan kodni kiriting</string>
-    <string name="sign_up_verify_screen_resend_text1">"Kodni qayta yuboriladi: "</string>
+    <string name="sign_up_verify_screen_resend_text1">"Kodni qayta yuborish: "</string>
     <string name="sign_up_verify_screen_continue">Keyingisi</string>
     <string name="sign_up_verify_screen_resend_text3">Qayta yuborish</string>
-    <string name="sign_up_verify_screen_resend_text2">" soniya"</string>
+    <string name="sign_up_verify_screen_resend_text2">" soniyadan so'ng"</string>
     <string name="password_screen_enter_pin">PIN kodingizni kiriting</string>
     <string name="password_screen_error_pin">PIN noto\'g\'ri terilgan</string>
     <string name="home_screen_sum">so\'m</string>
@@ -54,4 +54,9 @@
     <string name="add_card_screen_enter_card_month">Amal qilish muddatini kiriting ( oy )</string>
     <string name="add_card_screen_enter_card_name">Karta nomini kiriting</string>
     <string name="sign_in_screen_title">Kirish</string>
+    <string name="sign_up_screen_already_exist">Ro\'yhatdan o\'tganmisiz? </string>
+    <string name="sign_up_screen_already_exist_enter">Kirish</string>
+    <string name="sign_in_screen_enter_password">Parolni kiriting</string>
+    <string name="password_screen_repeat_pin">PIN kodni takrorlang</string>
+    <string name="password_screen_pin_not_match">PIN kodlar mos emas</string>
 </resources>

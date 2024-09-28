@@ -3,7 +3,9 @@ package uz.gita.otabek.bankauthcompose.screens.signUp
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +21,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
@@ -83,16 +86,34 @@ fun SignUpScreenContent(
         val birthDate = remember { mutableStateOf("") }
         val password = remember { mutableStateOf("7777") }
         val gender = remember { mutableStateOf("0") }
-        Image(
-            painter = painterResource(id = R.drawable.arrow_left),
-            contentDescription = null,
-            modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp)
-                .clip(shape = RoundedCornerShape(20.dp))
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            Image(
+                painter = painterResource(id = R.drawable.arrow_left),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .clip(shape = RoundedCornerShape(10.dp))
+                    .clickable {
+                        onEventDispatcher(SignUpContract.Intent.MoveToBack)
+                    }
+                    .padding(16.dp),
+            )
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier
+                .padding(top = 16.dp, end = 16.dp)
+                .clip(shape = RoundedCornerShape(10.dp))
                 .clickable {
-                    onEventDispatcher(SignUpContract.Intent.MoveToBack)
-                },
-        )
+                    onEventDispatcher(SignUpContract.Intent.MoveToSignIn)
+                }
+                .padding(16.dp)
+            ) {
+                Text(
+                    text = stringResource(id = R.string.sign_up_screen_already_exist), modifier = Modifier.padding(end = 4.dp)
+                )
+                Text(
+                    text = stringResource(id = R.string.sign_up_screen_already_exist_enter), color = MainGreen
+                )
+            }
+        }
         Column(modifier = Modifier
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp)
@@ -102,14 +123,14 @@ fun SignUpScreenContent(
 
             Text(
                 text = stringResource(id = R.string.sign_up_screen_registration),
-                style = TextStyle(
-                    color = Color.Black, fontSize = 36.sp, fontFamily = FontFamily(Font(R.font.droid_sans_bold)), letterSpacing = 1.sp
-                ),
+                color = Color.Black, fontSize = 36.sp, fontFamily = FontFamily(Font(R.font.droid_sans_bold)), letterSpacing = 1.sp,
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = stringResource(id = R.string.sign_up_screen_phone_number),
-                style = TextStyle(color = Grey, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 20.sp)
+                color = Grey,
+                fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                fontSize = 20.sp
             )
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -146,7 +167,9 @@ fun SignUpScreenContent(
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = stringResource(id = R.string.sign_up_screen_name),
-                style = TextStyle(color = Grey, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 20.sp)
+                color = Grey,
+                fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                fontSize = 20.sp
             )
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -171,7 +194,9 @@ fun SignUpScreenContent(
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = stringResource(id = R.string.sign_up_screen_surname),
-                style = TextStyle(color = Grey, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 20.sp)
+                color = Grey,
+                fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                fontSize = 20.sp
             )
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -195,7 +220,9 @@ fun SignUpScreenContent(
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = stringResource(id = R.string.sign_up_screen_born_date),
-                style = TextStyle(color = Grey, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 20.sp)
+                color = Grey,
+                fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                fontSize = 20.sp
             )
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -214,19 +241,6 @@ fun SignUpScreenContent(
                 visualTransformation = MaskVisualTransformation(Date.MASK.value)
             )
         }
-
-        Text(
-            text = "Уже есть аккаунт? Войти",
-            modifier = Modifier
-                .constrainAs(createRef()) {
-                    top.linkTo(guidLine8)
-                    bottom.linkTo(guidLine8)
-                }
-                .clip(shape = RoundedCornerShape(10.dp))
-                .clickable {
-                    onEventDispatcher(SignUpContract.Intent.MoveToSignIn)
-                }
-        )
 
         Card(modifier = Modifier
             .fillMaxWidth()
@@ -248,9 +262,11 @@ fun SignUpScreenContent(
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(20.dp), text = stringResource(id = R.string.sign_up_screen_continue), style = TextStyle(
-                    color = Color.White, fontSize = 20.sp
-                ), textAlign = TextAlign.Center
+                    .padding(20.dp),
+                text = stringResource(id = R.string.sign_up_screen_continue),
+                color = Color.White,
+                fontSize = 20.sp,
+                textAlign = TextAlign.Center
             )
         }
     }

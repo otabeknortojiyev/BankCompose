@@ -5,5 +5,5 @@ import uz.gita.otabek.domain.useCase.home.TotalBalanceUseCase
 import javax.inject.Inject
 
 class TotalBalanceUseCaseImpl @Inject constructor(private val homeRepository: HomeRepository) : TotalBalanceUseCase {
-    override fun invoke() = homeRepository.totalBalance()
+    override suspend fun invoke() = homeRepository.totalBalance()
 }

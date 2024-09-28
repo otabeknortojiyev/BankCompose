@@ -5,5 +5,5 @@ import uz.gita.otabek.domain.useCase.auth.CheckLanguageUseCase
 import javax.inject.Inject
 
 class CheckLanguageUseCaseImpl @Inject constructor(private val authRepository: AuthRepository) : CheckLanguageUseCase {
-    override fun invoke(): String = authRepository.checkLanguage()
+    override suspend fun invoke() = authRepository.checkLanguage()
 }

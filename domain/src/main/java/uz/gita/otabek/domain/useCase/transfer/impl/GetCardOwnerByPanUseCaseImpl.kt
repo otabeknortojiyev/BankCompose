@@ -7,5 +7,5 @@ import uz.gita.otabek.domain.useCase.transfer.GetCardOwnerByPanUseCase
 import javax.inject.Inject
 
 class GetCardOwnerByPanUseCaseImpl @Inject constructor(private val transferRepository: TransferRepository) : GetCardOwnerByPanUseCase {
-    override fun invoke(data: TransferRequest.GetCardOwnerByPan) = transferRepository.getCardOwnerByPan(data)
+    override suspend fun invoke(data: TransferRequest.GetCardOwnerByPan) = transferRepository.getCardOwnerByPan(data)
 }

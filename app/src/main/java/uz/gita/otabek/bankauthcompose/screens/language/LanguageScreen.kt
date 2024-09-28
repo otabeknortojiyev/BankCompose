@@ -25,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -84,11 +83,11 @@ private fun LanguageScreenContent(
             )
 
             Text(
-                text = "HAMKORBANK", style = TextStyle(
-                    fontSize = 20.sp,
-                    color = MainGreen,
-                    fontFamily = FontFamily(Font(R.font.archivo_black)),
-                ), modifier = Modifier.padding(start = 10.dp)
+                text = "HAMKORBANK",
+                color = MainGreen,
+                fontSize = 20.sp,
+                fontFamily = FontFamily(Font(R.font.archivo_black)),
+                modifier = Modifier.padding(start = 10.dp)
             )
         }
 
@@ -116,43 +115,55 @@ private fun LanguageScreenContent(
             when (isRussianText.intValue) {
                 1 -> {
                     Text(
-                        text = "Выберите язык\nприложения", style = TextStyle(
-                            color = LightBlack, letterSpacing = 2.sp, fontSize = 32.sp, fontFamily = FontFamily(Font(R.font.mulish_bold))
-                        )
+                        text = "Выберите язык\nприложения",
+                        color = LightBlack,
+                        letterSpacing = 2.sp,
+                        fontSize = 32.sp,
+                        fontFamily = FontFamily(Font(R.font.mulish_bold))
                     )
                     Spacer(modifier = Modifier.height(14.dp))
                     Text(
-                        text = "Вы всегда можете изменить язык в\nнастройках приложения", style = TextStyle(
-                            color = Color.Gray, letterSpacing = 1.sp, fontSize = 18.sp, fontFamily = FontFamily(Font(R.font.montserrat_light))
-                        )
+                        text = "Вы всегда можете изменить язык в\nнастройках приложения",
+                        color = Color.Gray,
+                        letterSpacing = 1.sp,
+                        fontSize = 18.sp,
+                        fontFamily = FontFamily(Font(R.font.montserrat_light))
                     )
                 }
 
                 0 -> {
                     Text(
-                        text = "Ilova tilini tanlang", style = TextStyle(
-                            color = LightBlack, letterSpacing = 2.sp, fontSize = 32.sp, fontFamily = FontFamily(Font(R.font.mulish_bold))
-                        )
+                        text = "Ilova tilini tanlang",
+                        color = LightBlack,
+                        letterSpacing = 2.sp,
+                        fontSize = 32.sp,
+                        fontFamily = FontFamily(Font(R.font.mulish_bold))
                     )
                     Spacer(modifier = Modifier.height(14.dp))
                     Text(
-                        text = "Siz ilova sozlamalarida tilni har doim\no'zgartirishingiz mumkin", style = TextStyle(
-                            color = Color.Gray, letterSpacing = 1.sp, fontSize = 18.sp, fontFamily = FontFamily(Font(R.font.montserrat_light))
-                        )
+                        text = "Siz ilova sozlamalarida tilni har doim\no'zgartirishingiz mumkin",
+                        color = Color.Gray,
+                        letterSpacing = 1.sp,
+                        fontSize = 18.sp,
+                        fontFamily = FontFamily(Font(R.font.montserrat_light))
                     )
                 }
 
                 else -> {
                     Text(
-                        text = "Select\n" + "application language", style = TextStyle(
-                            color = LightBlack, letterSpacing = 2.sp, fontSize = 32.sp, fontFamily = FontFamily(Font(R.font.mulish_bold))
-                        )
+                        text = "Select\n" + "application language",
+                        color = LightBlack,
+                        letterSpacing = 2.sp,
+                        fontSize = 32.sp,
+                        fontFamily = FontFamily(Font(R.font.mulish_bold))
                     )
                     Spacer(modifier = Modifier.height(14.dp))
                     Text(
-                        text = "You can always change the language in\n" + "application settings", style = TextStyle(
-                            color = Color.Gray, letterSpacing = 1.sp, fontSize = 18.sp, fontFamily = FontFamily(Font(R.font.montserrat_light))
-                        )
+                        text = "You can always change the language in\n" + "application settings",
+                        color = Color.Gray,
+                        letterSpacing = 1.sp,
+                        fontSize = 18.sp,
+                        fontFamily = FontFamily(Font(R.font.montserrat_light))
                     )
                 }
             }
@@ -180,9 +191,10 @@ private fun LanguageScreenContent(
             ) {
                 Image(painter = painterResource(id = R.drawable.flag_uz), contentDescription = null)
                 Text(
-                    text = "O'zbekcha", style = TextStyle(
-                        fontFamily = FontFamily(Font(R.font.montserrat_medium)), color = Color.Black
-                    ), modifier = Modifier.padding(start = 10.dp)
+                    text = "O'zbekcha",
+                    fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                    color = Color.Black,
+                    modifier = Modifier.padding(start = 10.dp)
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Image(painter = painterResource(id = R.drawable.right_arrow), contentDescription = null, modifier = Modifier.padding(end = 10.dp))
@@ -212,9 +224,10 @@ private fun LanguageScreenContent(
             ) {
                 Image(painter = painterResource(id = R.drawable.flag_ru), contentDescription = null)
                 Text(
-                    text = "Русский", style = TextStyle(
-                        fontFamily = FontFamily(Font(R.font.montserrat_medium)), color = Color.Black
-                    ), modifier = Modifier.padding(start = 10.dp)
+                    text = "Русский",
+                    fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                    color = Color.Black,
+                    modifier = Modifier.padding(start = 10.dp)
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Image(painter = painterResource(id = R.drawable.right_arrow), contentDescription = null, modifier = Modifier.padding(end = 10.dp))
@@ -243,9 +256,10 @@ private fun LanguageScreenContent(
             ) {
                 Image(painter = painterResource(id = R.drawable.flag_us), contentDescription = null)
                 Text(
-                    text = "English", style = TextStyle(
-                        fontFamily = FontFamily(Font(R.font.montserrat_medium)), color = Color.Black
-                    ), modifier = Modifier.padding(start = 10.dp)
+                    text = "English",
+                    fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                    color = Color.Black,
+                    modifier = Modifier.padding(start = 10.dp)
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Image(painter = painterResource(id = R.drawable.right_arrow), contentDescription = null, modifier = Modifier.padding(end = 10.dp))

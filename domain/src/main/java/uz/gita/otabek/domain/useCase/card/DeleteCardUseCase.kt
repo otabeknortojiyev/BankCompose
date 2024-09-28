@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 import uz.gita.otabek.common.request.CardRequest
 
 interface DeleteCardUseCase {
-    operator fun invoke(data: CardRequest.DeleteCard): Flow<Result<Unit>>
+    suspend operator fun invoke(data: CardRequest.DeleteCard): Result<Unit>
 }

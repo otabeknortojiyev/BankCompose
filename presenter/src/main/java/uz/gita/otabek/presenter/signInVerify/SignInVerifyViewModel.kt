@@ -3,8 +3,7 @@ package uz.gita.otabek.presenter.signInVerify
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.otabek.domain.useCase.auth.SignInResendUseCase
@@ -19,30 +18,30 @@ class SignInVerifyViewModel @Inject constructor(
 ) : ViewModel(), SignInVerifyContract.ViewModel {
     override fun onEventDispatcher(intent: SignInVerifyContract.Intent) = intent {
         when (intent) {
-            SignInVerifyContract.Intent.MoveToSignIn -> {
-                directions.moveToSignIn()
-            }
-
             is SignInVerifyContract.Intent.MoveToPassword -> {
-                signInVerifyUseCase(intent.code)
-                    .onEach {
-                        it.onSuccess {
-                            directions.moveToPassword()
-                        }.onFailure {
+                viewModelScope.launch {
+                    val result = signInVerifyUseCase(intent.code)
+                    result.onSuccess {
+                        directions.moveToPassword()
+                    }.onFailure {
 
-                        }
-                    }.launchIn(viewModelScope)
+                    }
+                }
             }
 
             SignInVerifyContract.Intent.ResendCode -> {
-                signInVerifyResendUseCase()
-                    .onEach {
-                        it.onSuccess {
+                viewModelScope.launch {
+                    val result = signInVerifyResendUseCase()
+                    result.onSuccess {
+                        directions.moveToPassword()
+                    }.onFailure {
 
-                        }.onFailure {
+                    }
+                }
+            }
 
-                        }
-                    }.launchIn(viewModelScope)
+            SignInVerifyContract.Intent.MoveToSignIn -> {
+                directions.moveToSignIn()
             }
         }
     }

@@ -1,11 +1,9 @@
 package uz.gita.otabek.presenter.monitoring
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
@@ -24,18 +22,18 @@ class MonitoringViewModel @Inject constructor(
             }
 
             MonitoringContract.Intent.DownloadLastTransfers -> {
-                lastTransfersUseCase()
-                    .onEach {
-                        it.onSuccess {
-                            if (it.isEmpty()) {
-                                reduce { state.copy(hasTransfers = false) }
-                            } else {
-                                reduce { state.copy(lastTransfers = it) }
-                            }
-                        }.onFailure {
-
+                viewModelScope.launch {
+                    val result = lastTransfersUseCase()
+                    result.onSuccess {
+                        if (it.isEmpty()) {
+                            reduce { state.copy(hasTransfers = false) }
+                        } else {
+                            reduce { state.copy(lastTransfers = it) }
                         }
-                    }.launchIn(viewModelScope)
+                    }.onFailure {
+
+                    }
+                }
             }
         }
     }

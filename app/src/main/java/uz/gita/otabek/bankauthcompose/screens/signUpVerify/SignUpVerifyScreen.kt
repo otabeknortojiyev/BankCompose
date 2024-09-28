@@ -67,8 +67,7 @@ class SignUpVerifyScreen(private val phone: String) : Screen {
 
 @Composable
 fun SignUpVerifyScreenContent(
-    uiState: State<SignUpVerifyContract.UiState>,
-    onEventDispatcher: (SignUpVerifyContract.Intent) -> Unit, phone: String
+    uiState: State<SignUpVerifyContract.UiState>, onEventDispatcher: (SignUpVerifyContract.Intent) -> Unit, phone: String
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -97,11 +96,9 @@ fun SignUpVerifyScreenContent(
                 .constrainAs(createRef()) {
                     top.linkTo(guidLine1)
                 },
-            style = TextStyle(
-                color = Color.Black,
-                fontSize = 36.sp,
-                fontFamily = FontFamily(Font(R.font.droid_sans_bold)),
-            ),
+            color = Color.Black,
+            fontSize = 36.sp,
+            fontFamily = FontFamily(Font(R.font.droid_sans_bold))
         )
 
         Column(modifier = Modifier.constrainAs(createRef()) {
@@ -110,13 +107,17 @@ fun SignUpVerifyScreenContent(
             Text(
                 text = stringResource(id = R.string.sign_up_verify_screen_phone),
                 modifier = Modifier.padding(start = 20.dp),
-                style = TextStyle(color = Color.Gray, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 20.sp)
+                color = Color.Gray,
+                fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                fontSize = 20.sp
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = phone,
                 modifier = Modifier.padding(start = 20.dp),
-                style = TextStyle(color = Color.Gray, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 20.sp)
+                color = Color.Gray,
+                fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                fontSize = 20.sp
             )
         }
 
@@ -133,8 +134,7 @@ fun SignUpVerifyScreenContent(
                 top.linkTo(guidLine3)
             }) {
             for (i in 0 until 6) {
-                AppTextField(
-                    value = textValues[i],
+                AppTextField(value = textValues[i],
                     onValueChange = { newValue ->
                         if (textValues[0] == "") {
                             focusRequesters[0].requestFocus()
@@ -186,9 +186,8 @@ fun SignUpVerifyScreenContent(
                     .fillMaxWidth()
                     .padding(20.dp),
                 text = stringResource(id = R.string.sign_up_verify_screen_continue),
-                style = TextStyle(
-                    color = Color.White, fontSize = 20.sp
-                ),
+                color = Color.White,
+                fontSize = 20.sp,
                 textAlign = TextAlign.Center
             )
         }
@@ -209,18 +208,24 @@ fun SignUpVerifyScreenContent(
             }) {
             Text(
                 text = stringResource(id = R.string.sign_up_verify_screen_resend_text1),
-                style = TextStyle(color = Color.Gray, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 16.sp)
+                color = Color.Gray,
+                fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                fontSize = 16.sp
             )
-            Text(text = "$timeLeft", style = TextStyle(color = Color.Gray, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 16.sp))
+            Text(text = "$timeLeft", color = Color.Gray, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 16.sp)
             Text(
                 text = stringResource(id = R.string.sign_up_verify_screen_resend_text2),
-                style = TextStyle(color = Color.Gray, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 16.sp)
+                color = Color.Gray,
+                fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                fontSize = 16.sp
             )
         }
 
         if (timeLeft == 0) {
             Text(text = stringResource(id = R.string.sign_up_verify_screen_resend_text3),
-                style = TextStyle(color = Color.Blue, fontFamily = FontFamily(Font(R.font.montserrat_medium)), fontSize = 20.sp),
+                color = Color.Blue,
+                fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                fontSize = 20.sp,
                 modifier = Modifier
                     .padding(start = 10.dp)
                     .constrainAs(createRef()) {

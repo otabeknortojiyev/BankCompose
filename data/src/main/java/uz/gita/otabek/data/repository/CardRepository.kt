@@ -1,12 +1,11 @@
 package uz.gita.otabek.data.repository
 
-import kotlinx.coroutines.flow.Flow
 import uz.gita.otabek.common.request.CardRequest
 import uz.gita.otabek.common.response.CardResponse
 
 interface CardRepository {
-    fun getCards(): Flow<Result<List<CardResponse.CardItem>>>
-    fun addCard(data: CardRequest.AddCard): Flow<Result<Unit>>
-    fun updateCard(data: CardRequest.UpdateCard): Flow<Result<Unit>>
-    fun deleteCard(data: CardRequest.DeleteCard): Flow<Result<Unit>>
+    suspend fun getCards(): Result<List<CardResponse.CardItem>>
+    suspend fun addCard(data: CardRequest.AddCard): Result<Unit>
+    suspend fun updateCard(data: CardRequest.UpdateCard): Result<Unit>
+    suspend fun deleteCard(data: CardRequest.DeleteCard): Result<Unit>
 }

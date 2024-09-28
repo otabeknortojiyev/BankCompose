@@ -1,8 +1,8 @@
 package uz.gita.otabek.data.repository.impl
 
 import com.google.gson.Gson
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import uz.gita.otabek.common.ErrorMessage
 import uz.gita.otabek.common.request.AuthRequest
 import uz.gita.otabek.data.local.LocalStorage
@@ -14,116 +14,117 @@ class AuthRepositoryImpl @Inject constructor(
     private val api: AuthApi, private val localStorage: LocalStorage
 ) : AuthRepository {
     private val gson = Gson()
-    override fun signUp(data: AuthRequest.SignUp): Flow<Result<Unit>> = flow {
+    override suspend fun signUp(data: AuthRequest.SignUp): Result<Unit> = withContext(Dispatchers.IO) {
         val result = api.signUp(data)
         if (result.isSuccessful && result.body() != null) {
             localStorage.token = result.body()!!.token
-            emit(Result.success(Unit))
+            Result.success(Unit)
         } else if (result.errorBody() != null) {
             val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            emit(Result.failure(Exception(error.message)))
-
+            Result.failure(Exception(error.message))
         } else {
-            emit(Result.failure(Throwable(result.message())))
+            Result.failure(Throwable(result.message()))
         }
     }
 
-    override fun signUpVerify(code: String): Flow<Result<Unit>> = flow {
+    override suspend fun signUpVerify(code: String): Result<Unit> = withContext(Dispatchers.IO) {
         val result = api.signUpVerify(AuthRequest.SignUpVerify(localStorage.token, code))
         if (result.isSuccessful && result.body() != null) {
             localStorage.accessToken = result.body()!!.accessToken
             localStorage.refreshToken = result.body()!!.refreshToken
-            emit(Result.success(Unit))
+            Result.success(Unit)
         } else if (result.errorBody() != null) {
             val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            emit(Result.failure(Exception(error.message)))
+            Result.failure(Exception(error.message))
         } else {
-            emit(Result.failure(Throwable(result.message())))
+            Result.failure(Throwable(result.message()))
         }
     }
 
-    override fun signIn(data: AuthRequest.SignIn): Flow<Result<Unit>> = flow {
+    override suspend fun signIn(data: AuthRequest.SignIn): Result<Unit> = withContext(Dispatchers.IO) {
         val result = api.signIn(data)
         if (result.isSuccessful && result.body() != null) {
             localStorage.token = result.body()!!.token
-            emit(Result.success(Unit))
+            Result.success(Unit)
         } else if (result.errorBody() != null) {
             val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            emit(Result.failure(Exception(error.message)))
+            Result.failure(Exception(error.message))
         } else {
-            emit(Result.failure(Throwable(result.message())))
+            Result.failure(Throwable(result.message()))
         }
     }
 
-    override fun signInVerify(code: String): Flow<Result<Unit>> = flow {
+    override suspend fun signInVerify(code: String): Result<Unit> = withContext(Dispatchers.IO) {
         val result = api.signInVerify(AuthRequest.SignInVerify(localStorage.token, code))
         if (result.isSuccessful && result.body() != null) {
             localStorage.accessToken = result.body()!!.accessToken
             localStorage.refreshToken = result.body()!!.refreshToken
-            emit(Result.success(Unit))
+            Result.success(Unit)
         } else if (result.errorBody() != null) {
             val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            emit(Result.failure(Exception(error.message)))
+            Result.failure(Exception(error.message))
         } else {
-            emit(Result.failure(Throwable(result.message())))
+            Result.failure(Throwable(result.message()))
         }
     }
 
-    override fun updateToken(data: AuthRequest.UpdateToken): Flow<Result<Unit>> = flow {
+    override suspend fun updateToken(data: AuthRequest.UpdateToken): Result<Unit> = withContext(Dispatchers.IO) {
         val result = api.updateToken(data)
         if (result.isSuccessful && result.body() != null) {
-            emit(Result.success(Unit))
+            Result.success(Unit)
         } else if (result.errorBody() != null) {
             val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            emit(Result.failure(Exception(error.message)))
+            Result.failure(Exception(error.message))
         } else {
-            emit(Result.failure(Throwable(result.message())))
+            Result.failure(Throwable(result.message()))
         }
     }
 
-    override fun signUpResend(): Flow<Result<Unit>> = flow {
+    override suspend fun signUpResend(): Result<Unit> = withContext(Dispatchers.IO) {
         val result = api.signUpResend(AuthRequest.SignUpResend(localStorage.token))
         if (result.isSuccessful && result.body() != null) {
             localStorage.token = result.body()!!.token
-            emit(Result.success(Unit))
+            Result.success(Unit)
         } else if (result.errorBody() != null) {
             val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            emit(Result.failure(Exception(error.message)))
+            Result.failure(Exception(error.message))
         } else {
-            emit(Result.failure(Throwable(result.message())))
+            Result.failure(Throwable(result.message()))
         }
     }
 
-    override fun signInResend(): Flow<Result<Unit>> = flow {
+    override suspend fun signInResend(): Result<Unit> = withContext(Dispatchers.IO) {
         val result = api.signInResend(AuthRequest.SignInResend(localStorage.token))
         if (result.isSuccessful && result.body() != null) {
             localStorage.token = result.body()!!.token
-            emit(Result.success(Unit))
+            Result.success(Unit)
         } else if (result.errorBody() != null) {
             val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            emit(Result.failure(Exception(error.message)))
+            Result.failure(Exception(error.message))
         } else {
-            emit(Result.failure(Throwable(result.message())))
+            Result.failure(Throwable(result.message()))
         }
     }
 
-    override fun savePIN(pin: String) {
+    override suspend fun savePIN(pin: String): Result<Unit> = withContext(Dispatchers.IO) {
         localStorage.pin = pin
+        Result.success(Unit)
     }
 
-    override fun checkPIN(): Boolean {
-        return localStorage.pin.isNotEmpty()
+    override suspend fun checkPIN(): Result<Boolean> = withContext(Dispatchers.IO) {
+        Result.success(localStorage.pin.isNotEmpty())
     }
 
-    override fun getPIN(): String {
-        return localStorage.pin
+    override suspend fun getPIN(): Result<String> = withContext(Dispatchers.IO) {
+        Result.success(localStorage.pin)
     }
 
-    override fun setLanguage(lang: String) {
+    override suspend fun setLanguage(lang: String): Result<Unit> = withContext(Dispatchers.IO) {
         localStorage.language = lang
+        Result.success(Unit)
     }
 
-    override fun checkLanguage(): String {
-        return localStorage.language
+    override suspend fun checkLanguage(): Result<String> = withContext(Dispatchers.IO) {
+        Result.success(localStorage.language)
     }
 }

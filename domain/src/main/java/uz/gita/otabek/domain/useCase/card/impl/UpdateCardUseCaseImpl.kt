@@ -6,5 +6,5 @@ import uz.gita.otabek.domain.useCase.card.UpdateCardUseCase
 import javax.inject.Inject
 
 class UpdateCardUseCaseImpl @Inject constructor(private val cardRepository: CardRepository) : UpdateCardUseCase {
-    override fun invoke(data: CardRequest.UpdateCard) = cardRepository.updateCard(data)
+    override suspend fun invoke(data: CardRequest.UpdateCard) = cardRepository.updateCard(data)
 }

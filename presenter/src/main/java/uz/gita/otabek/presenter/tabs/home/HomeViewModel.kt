@@ -4,8 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
@@ -26,33 +25,25 @@ class HomeViewModel @Inject constructor(
         when (intent) {
             HomeContracts.Intent.GetInitData -> {
                 reduce { state.copy(isLoading = true) }
-                basicInfoUseCase().onEach {
-                    it.onSuccess {
+                viewModelScope.launch {
+                    basicInfoUseCase().onSuccess {
                         reduce { state.copy(name = it.firstName) }
-                        delay(5000)
-                        reduce { state.copy(isLoading = false) }
                     }.onFailure {
 
                     }
-                }.launchIn(viewModelScope)
-                totalBalanceUseCase().onEach {
-                    it.onSuccess {
+                    totalBalanceUseCase().onSuccess {
                         reduce { state.copy(balance = it.totalBalance) }
-                        delay(5000)
-                        reduce { state.copy(isLoading = false) }
                     }.onFailure {
 
                     }
-                }.launchIn(viewModelScope)
-                getCardsUseCase().onEach {
-                    it.onSuccess {
+                    getCardsUseCase().onSuccess {
                         reduce { state.copy(cards = it) }
-                        delay(5000)
-                        reduce { state.copy(isLoading = false) }
                     }.onFailure {
 
                     }
-                }.launchIn(viewModelScope)
+                    delay(5000)
+                    reduce { state.copy(isLoading = false) }
+                }
             }
 
             HomeContracts.Intent.MoveToMonitoring -> {

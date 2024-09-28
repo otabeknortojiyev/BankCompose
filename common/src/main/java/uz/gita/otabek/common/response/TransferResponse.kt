@@ -25,8 +25,8 @@ sealed interface TransferResponse {
 
     data class HistoryItem(
         val type: String,
-        val from: String,
         val to: String,
+        val from: String,
         val amount: Int,
         val time: Int
     ) : TransferResponse

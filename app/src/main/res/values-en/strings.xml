@@ -15,7 +15,7 @@
     <string name="sign_up_verify_screen_phone">Enter the code sent to the number</string>
     <string name="sign_up_verify_screen_resend_text1">"Resending the code via "</string>
     <string name="sign_up_verify_screen_continue">Continue</string>
-    <string name="sign_up_verify_screen_resend_text3">Resend</string>
+    <string name="sign_up_verify_screen_resend_text3">"Resend "</string>
     <string name="sign_up_verify_screen_resend_text2">" seconds"</string>
     <string name="password_screen_enter_pin">Enter your PIN</string>
     <string name="password_screen_error_pin">Invalid PIN</string>
@@ -54,4 +54,9 @@
     <string name="add_card_screen_enter_card_month">Enter the card expiration date (month)</string>
     <string name="add_card_screen_enter_card_name">Enter card name</string>
     <string name="sign_in_screen_title">Log in</string>
+    <string name="sign_up_screen_already_exist">Already have an account? </string>
+    <string name="sign_up_screen_already_exist_enter">Login</string>
+    <string name="sign_in_screen_enter_password">Enter password</string>
+    <string name="password_screen_repeat_pin">Repeat PIN code</string>
+    <string name="password_screen_pin_not_match">PIN code does not match</string>
 </resources>
