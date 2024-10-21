@@ -25,6 +25,10 @@ enum class Lang {
     uz, ru, en
 }
 
+enum class CardType(val value: String) {
+    UZCARD("uzcard"), HUMO("humo")
+}
+
 enum class Type(val value: String) {
     INCOME("income"), OUTCOME("outcome")
 }

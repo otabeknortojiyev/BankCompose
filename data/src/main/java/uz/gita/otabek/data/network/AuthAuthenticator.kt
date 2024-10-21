@@ -1,6 +1,5 @@
 package uz.gita.otabek.data.network
 
-import android.util.Log
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
 import okhttp3.Request
@@ -46,7 +45,6 @@ internal class AuthAuthenticator @Inject constructor(
                     localStorage.accessToken = ""
                     localStorage.refreshToken = ""
                     localStorage.token = ""
-                    Log.d("TTT", "authenticate: go to signIn screen")
                 }
             }
 

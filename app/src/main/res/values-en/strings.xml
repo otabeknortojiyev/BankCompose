@@ -59,4 +59,16 @@
     <string name="sign_in_screen_enter_password">Enter password</string>
     <string name="password_screen_repeat_pin">Repeat PIN code</string>
     <string name="password_screen_pin_not_match">PIN code does not match</string>
+    <string name="add_card_screen_success_adding_card">Card successfully added</string>
+    <string name="transfers_screen_title">Transfers</string>
+    <string name="transfers_screen_recent_transfers_transfer">Translate</string>
+    <string name="transfers_screen_by_phone_number">By phone number</string>
+    <string name="transfers_screen_between_my_cards">Between my cards</string>
+    <string name="transfers_screen_golden_crown">Golden Crown</string>
+    <string name="transfers_screen_visa_direct">VISA Direct</string>
+    <string name="transfer_by_phone_number_screen_title">By phone number</string>
+    <string name="transfer_by_phone_number_screen_from">From</string>
+    <string name="transfer_by_phone_number_screen_to">To</string>
+    <string name="transfer_by_phone_number_screen_write_pan">Enter card number</string>
+    <string name="transfer_by_phone_number_screen_chose_card">Choose card</string>
 </resources>

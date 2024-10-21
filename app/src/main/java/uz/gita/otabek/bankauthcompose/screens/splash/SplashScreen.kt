@@ -107,4 +107,5 @@ private fun SplashScreenContent(
 
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(Color.White)
+    systemUiController.setNavigationBarColor(Color.White)
 }

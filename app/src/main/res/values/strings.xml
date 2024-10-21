@@ -63,4 +63,18 @@
     <string name="add_card_screen_enter_card_year">Введите срок действия карты ( год )</string>
     <string name="add_card_screen_enter_card_month">Введите срок действия карты ( месяц )</string>
     <string name="add_card_screen_enter_card_name">Введите название карты</string>
+    <string name="add_card_screen_success_adding_card">Карта успешно добавлена</string>
+
+    <string name="transfers_screen_title">Переводы</string>
+    <string name="transfers_screen_recent_transfers_transfer">Перевести</string>
+    <string name="transfers_screen_by_phone_number">По номеру карты</string>
+    <string name="transfers_screen_between_my_cards">Между моими картами</string>
+    <string name="transfers_screen_golden_crown">Золотая Корона</string>
+    <string name="transfers_screen_visa_direct">VISA Direct</string>
+
+    <string name="transfer_by_phone_number_screen_title">По номеру карты</string>
+    <string name="transfer_by_phone_number_screen_from">Откуда</string>
+    <string name="transfer_by_phone_number_screen_to">Куда</string>
+    <string name="transfer_by_phone_number_screen_write_pan">Укажите номер</string>
+    <string name="transfer_by_phone_number_screen_chose_card">Выберите карту</string>
 </resources>

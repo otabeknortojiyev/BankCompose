@@ -78,7 +78,6 @@ fun SignUpScreenContent(
             .background(PasswordBackGroundGray)
     ) {
         val guidLine1 = createGuidelineFromTop(0.1f)
-        val guidLine8 = createGuidelineFromTop(0.8f)
         val guidLine9 = createGuidelineFromTop(0.9f)
         val phone = remember { mutableStateOf("") }
         val name = remember { mutableStateOf("") }
@@ -272,4 +271,5 @@ fun SignUpScreenContent(
     }
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(PasswordBackGroundGray)
+    systemUiController.setNavigationBarColor(PasswordBackGroundGray)
 }

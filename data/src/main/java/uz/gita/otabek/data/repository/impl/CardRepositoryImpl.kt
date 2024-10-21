@@ -4,13 +4,13 @@ import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import uz.gita.otabek.common.ErrorMessage
 import uz.gita.otabek.common.request.CardRequest
 import uz.gita.otabek.common.response.CardResponse
 import uz.gita.otabek.data.local.LocalStorage
 import uz.gita.otabek.data.local.room.CardDataBase
 import uz.gita.otabek.data.network.CardApi
 import uz.gita.otabek.data.repository.CardRepository
+import uz.gita.otabek.data.utils.toResult
 import javax.inject.Inject
 
 class CardRepositoryImpl @Inject constructor(
@@ -18,7 +18,6 @@ class CardRepositoryImpl @Inject constructor(
     private val dataBase: CardDataBase
 ) : CardRepository {
     private val gson = Gson()
-
     override suspend fun getCards(): Result<List<CardResponse.CardItem>> = withContext(Dispatchers.IO) {
         val cachedCards = dataBase.cardDao().getAllCards()
         if (cachedCards.isNotEmpty()) {
@@ -34,53 +33,21 @@ class CardRepositoryImpl @Inject constructor(
             }
             Result.success(cachedCards)
         }
-        val result = api.getCards()
-        if (result.isSuccessful && result.body() != null) {
-            val cards = result.body()!!
-            dataBase.cardDao().insertCards(cards)
-            Result.success(cards)
-        } else if (result.errorBody() != null) {
-            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            Result.failure(Exception(error.message))
-        } else {
-            Result.failure(Throwable(result.message()))
+        api.getCards().toResult(gson) {
+            dataBase.cardDao().insertCards(it)
+            Result.success(it)
         }
     }
 
-
     override suspend fun addCard(data: CardRequest.AddCard): Result<Unit> = withContext(Dispatchers.IO) {
-        val result = api.addCard(data)
-        if (result.isSuccessful && result.body() != null) {
-            Result.success(Unit)
-        } else if (result.errorBody() != null) {
-            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            Result.failure(Exception(error.message))
-        } else {
-            Result.failure(Throwable(result.message()))
-        }
+        api.addCard(data).toResult(gson) { Result.success(Unit) }
     }
 
     override suspend fun updateCard(data: CardRequest.UpdateCard): Result<Unit> = withContext(Dispatchers.IO) {
-        val result = api.updateCard(data)
-        if (result.isSuccessful && result.body() != null) {
-            Result.success(Unit)
-        } else if (result.errorBody() != null) {
-            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            Result.failure(Exception(error.message))
-        } else {
-            Result.failure(Throwable(result.message()))
-        }
+        api.updateCard(data).toResult(gson) { Result.success(Unit) }
     }
 
     override suspend fun deleteCard(data: CardRequest.DeleteCard): Result<Unit> = withContext(Dispatchers.IO) {
-        val result = api.deleteCard(data.cardId)
-        if (result.isSuccessful && result.body() != null) {
-            Result.success(Unit)
-        } else if (result.errorBody() != null) {
-            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            Result.failure(Exception(error.message))
-        } else {
-            Result.failure(Throwable(result.message()))
-        }
+        api.deleteCard(data.cardId).toResult(gson) { Result.success(Unit) }
     }
 }

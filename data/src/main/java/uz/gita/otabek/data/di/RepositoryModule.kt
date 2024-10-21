@@ -7,9 +7,11 @@ import dagger.hilt.components.SingletonComponent
 import uz.gita.otabek.data.repository.AuthRepository
 import uz.gita.otabek.data.repository.CardRepository
 import uz.gita.otabek.data.repository.HomeRepository
+import uz.gita.otabek.data.repository.TransferRepository
 import uz.gita.otabek.data.repository.impl.AuthRepositoryImpl
 import uz.gita.otabek.data.repository.impl.CardRepositoryImpl
 import uz.gita.otabek.data.repository.impl.HomeRepositoryImpl
+import uz.gita.otabek.data.repository.impl.TransferRepositoryImpl
 import javax.inject.Singleton
 
 @Module
@@ -24,4 +26,7 @@ interface RepositoryModule {
 
     @[Binds Singleton]
     fun provideCardRepository(impl: CardRepositoryImpl): CardRepository
+
+    @[Binds Singleton]
+    fun provideTransferRepository(impl: TransferRepositoryImpl): TransferRepository
 }

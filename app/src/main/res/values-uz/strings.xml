@@ -59,4 +59,16 @@
     <string name="sign_in_screen_enter_password">Parolni kiriting</string>
     <string name="password_screen_repeat_pin">PIN kodni takrorlang</string>
     <string name="password_screen_pin_not_match">PIN kodlar mos emas</string>
+    <string name="add_card_screen_success_adding_card">Karta muvaffaqiyatli qo\'shildi</string>
+    <string name="transfers_screen_title">O\'tkazmalar</string>
+    <string name="transfers_screen_recent_transfers_transfer">Yuborish</string>
+    <string name="transfers_screen_by_phone_number">Karta nomeri orqali</string>
+    <string name="transfers_screen_between_my_cards">O\'zimning kartalarim orqali</string>
+    <string name="transfers_screen_golden_crown">Zolotaya Korona</string>
+    <string name="transfers_screen_visa_direct">VISA Direct</string>
+    <string name="transfer_by_phone_number_screen_title">Karta raqami orqali</string>
+    <string name="transfer_by_phone_number_screen_from">Qayerdan</string>
+    <string name="transfer_by_phone_number_screen_to">Qayerga</string>
+    <string name="transfer_by_phone_number_screen_write_pan">Karta raqamini kiriting</string>
+    <string name="transfer_by_phone_number_screen_chose_card">Kartani tanlang</string>
 </resources>

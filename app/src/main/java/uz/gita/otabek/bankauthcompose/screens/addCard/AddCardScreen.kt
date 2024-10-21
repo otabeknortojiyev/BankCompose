@@ -80,7 +80,11 @@ private fun AddCardScreenContent(
     ) {
         if (uiState.value.success) {
             AlertDialog(onDismissRequest = {}, title = {
-                Text(text = "Успешно", fontSize = 20.sp, fontFamily = FontFamily(Font(R.font.montserrat_regular)))
+                Text(
+                    text = stringResource(id = R.string.add_card_screen_success_adding_card),
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily(Font(R.font.montserrat_regular))
+                )
             }, confirmButton = {
                 Button(onClick = {
                     onEventDispatcher(AddCardContract.Intent.CloseDialog)

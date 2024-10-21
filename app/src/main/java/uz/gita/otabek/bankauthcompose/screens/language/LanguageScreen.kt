@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.otabek.bankauthcompose.R
@@ -266,4 +267,6 @@ private fun LanguageScreenContent(
             }
         }
     }
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(Color.White)
 }

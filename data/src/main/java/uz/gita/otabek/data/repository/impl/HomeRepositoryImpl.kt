@@ -4,12 +4,12 @@ import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import uz.gita.otabek.common.ErrorMessage
 import uz.gita.otabek.common.request.HomeRequest
 import uz.gita.otabek.common.response.HomeResponse
 import uz.gita.otabek.data.local.LocalStorage
 import uz.gita.otabek.data.network.HomeApi
 import uz.gita.otabek.data.repository.HomeRepository
+import uz.gita.otabek.data.utils.toResult
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
@@ -18,7 +18,6 @@ class HomeRepositoryImpl @Inject constructor(
     private val gson = Gson()
     override suspend fun totalBalance(): Result<HomeResponse.TotalBalance> = withContext(Dispatchers.IO) {
         val cachedTotalBalance: Int = storage.totalBalance
-
         if (cachedTotalBalance == 0) {
             launch {
                 try {
@@ -32,16 +31,9 @@ class HomeRepositoryImpl @Inject constructor(
             }
             Result.success(HomeResponse.TotalBalance(cachedTotalBalance))
         }
-        val result = api.totalBalance()
-        if (result.isSuccessful && result.body() != null) {
-            val totalBalance = result.body()!!.totalBalance
-            storage.totalBalance = totalBalance
-            Result.success(HomeResponse.TotalBalance(totalBalance))
-        } else if (result.errorBody() != null) {
-            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            Result.failure(Exception(error.message))
-        } else {
-            Result.failure(Throwable(result.message()))
+        api.totalBalance().toResult(gson) {
+            storage.totalBalance = it.totalBalance
+            Result.success(HomeResponse.TotalBalance(it.totalBalance))
         }
     }
 
@@ -65,63 +57,29 @@ class HomeRepositoryImpl @Inject constructor(
             }
             Result.success(HomeResponse.BasicInfo(cachedName, cachedGenderType, cachedAge))
         }
-        val result = api.basicInfo()
-        if (result.isSuccessful && result.body() != null) {
-            val name = result.body()!!.firstName
-            val genderType = result.body()!!.genderType
-            val age = result.body()!!.age
-            storage.userName = name
-            storage.genderType = genderType
-            storage.userAge = age
-            Result.success(HomeResponse.BasicInfo(name, genderType, age))
-        } else if (result.errorBody() != null) {
-            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-            Result.failure(Exception(error.message))
-        } else {
-            Result.failure(Throwable(result.message()))
+        api.basicInfo().toResult(gson) {
+            storage.userName = it.firstName
+            storage.genderType = it.genderType
+            storage.userAge = it.age
+            Result.success(HomeResponse.BasicInfo(it.firstName, it.genderType, it.age))
         }
     }
 
     override suspend fun fullInfo(): Result<HomeResponse.FullInfo> = withContext(Dispatchers.IO) {
-        val result = api.fullInfo()
-        if (result.isSuccessful && result.body() != null) {
-            Result.success(
-                HomeResponse.FullInfo(
-                    result.body()!!.firstName, result.body()!!.lastName, result.body()!!.phone, result.body()!!.bornDate, result.body()!!.gender
-                )
-            )
-        } else if (result.errorBody() != null) {
-//            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-//            emit(Result.failure(Exception(error.message)))
-            Result.failure(Exception("Nimadur xato"))
-        } else {
-            Result.failure(Throwable(result.message()))
+        api.fullInfo().toResult(gson) {
+            Result.success(HomeResponse.FullInfo(it.firstName, it.lastName, it.phone, it.bornDate, it.gender))
         }
     }
 
     override suspend fun updateInfo(data: HomeRequest.UpdateInfo): Result<HomeResponse.UpdateInfo> = withContext(Dispatchers.IO) {
-        val result = api.updateInfo(data)
-        if (result.isSuccessful && result.body() != null) {
-            Result.success(HomeResponse.UpdateInfo(result.body()!!.message))
-        } else if (result.errorBody() != null) {
-//            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-//            emit(Result.failure(Exception(error.message)))
-            Result.failure(Exception("Nimadur xato"))
-        } else {
-            Result.failure(Throwable(result.message()))
+        api.updateInfo(data).toResult(gson) {
+            Result.success(HomeResponse.UpdateInfo(it.message))
         }
     }
 
     override suspend fun lastTransfers(): Result<HomeResponse.LastTransfers> = withContext(Dispatchers.IO) {
-        val result = api.lastTransfers()
-        if (result.isSuccessful && result.body() != null) {
-            Result.success(HomeResponse.LastTransfers)
-        } else if (result.errorBody() != null) {
-//            val error = gson.fromJson(result.errorBody()!!.string(), ErrorMessage::class.java)
-//            emit(Result.failure(Exception(error.message)))
-            Result.failure(Exception("Nimadur xato"))
-        } else {
-            Result.failure(Throwable(result.message()))
+        api.lastTransfers().toResult(gson) {
+            Result.success(it)
         }
     }
 }
