@@ -14,20 +14,20 @@ espressoCore = "3.6.1"
 kotlinxSerializationJson = "1.7.1"
 library = "4.0.0"
 libraryNoOp = "3.5.2"
-lifecycleRuntimeKtx = "2.8.5"
-activityCompose = "1.9.2"
-composeBom = "2024.09.01"
+lifecycleRuntimeKtx = "2.8.6"
+activityCompose = "1.9.3"
+composeBom = "2024.10.00"
 appcompat = "1.7.0"
 lifecycleViewmodelKtx = "2.8.6"
 loggingInterceptor = "5.0.0-alpha.3"
-material = "1.7.1"
+material = "1.7.4"
 retrofit = "2.11.0"
 retrofit2KotlinCoroutinesAdapter = "0.9.2"
 roomRuntime = "2.6.1"
 voyagerBottomSheetNavigator = "1.1.0-beta02"
 voyagerTabNavigator = "1.1.0-beta02"
 voyagerVersion = "1.1.0-beta02"
-kotlinxCoroutinesCore = "1.8.0"
+kotlinxCoroutinesCore = "1.9.0"
 materialVersion = "1.12.0"
 orbitCompose = "4.3.2"
 orbitCore = "4.3.2"
@@ -42,6 +42,7 @@ roomCommon = "2.6.1"
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+#noinspection SimilarGradleDependency
 gson-v288 = { module = "com.google.code.gson:gson", version.ref = "gsonVersion" }
 orbit-compose = { module = "org.orbit-mvi:orbit-compose", version.ref = "orbitCompose" }
 orbit-core = { module = "org.orbit-mvi:orbit-core", version.ref = "orbitCore" }
@@ -53,6 +54,7 @@ androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constr
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+#noinspection SimilarGradleDependency
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }

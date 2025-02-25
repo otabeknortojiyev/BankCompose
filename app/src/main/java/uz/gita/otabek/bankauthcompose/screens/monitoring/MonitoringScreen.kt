@@ -13,8 +13,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,52 +56,69 @@ object MonitoringScreen : Screen {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun MonitoringScreenContent(
-    uiState: State<MonitoringContract.UiState>, onEventDispatcher: (MonitoringContract.Intent) -> Unit
+    uiState: State<MonitoringContract.UiState>, onEventDispatcher: (MonitoringContract.Intent) -> Unit,
 ) {
-    onEventDispatcher(MonitoringContract.Intent.DownloadLastTransfers)
-    Column(
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = uiState.value.isLoading,
+        onRefresh = { onEventDispatcher(MonitoringContract.Intent.DownloadLastTransfers) })
+    LaunchedEffect(Unit) { onEventDispatcher(MonitoringContract.Intent.DownloadLastTransfers) }
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = PasswordBackGroundGray)
+            .pullRefresh(pullRefreshState)
     ) {
-        Box(
-            modifier = Modifier.fillMaxWidth()
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = PasswordBackGroundGray)
         ) {
-            Image(painter = painterResource(id = R.drawable.arrow_left),
-                contentDescription = null,
-                modifier = Modifier
-                    .align(alignment = Alignment.CenterStart)
-                    .clip(shape = RoundedCornerShape(10.dp))
-                    .clickable {
-                        onEventDispatcher(MonitoringContract.Intent.MoveToHome)
+            Box(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Image(painter = painterResource(id = R.drawable.arrow_left),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .align(alignment = Alignment.CenterStart)
+                        .clip(shape = RoundedCornerShape(10.dp))
+                        .clickable {
+                            onEventDispatcher(MonitoringContract.Intent.MoveToHome)
+                        }
+                        .padding(16.dp))
+                Text(
+                    text = stringResource(id = R.string.home_screen_monitoring),
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .align(alignment = Alignment.Center),
+                    fontFamily = FontFamily(Font(R.font.montserrat_regular)),
+                    fontSize = 20.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
+            if (uiState.value.lastTransfers.isEmpty()) {
+                Image(
+                    painter = painterResource(id = R.drawable.collection_list_is_empty),
+                    contentDescription = null,
+                    alignment = Alignment.Center,
+                    modifier = Modifier.fillMaxSize()
+                )
+            } else {
+                LazyColumn {
+                    items(uiState.value.lastTransfers.size) {
+                        Transfer(uiState.value.lastTransfers[it])
                     }
-                    .padding(16.dp))
-            Text(
-                text = stringResource(id = R.string.home_screen_monitoring),
-                modifier = Modifier
-                    .padding(16.dp)
-                    .align(alignment = Alignment.Center),
-                fontFamily = FontFamily(Font(R.font.montserrat_regular)),
-                fontSize = 20.sp,
-                textAlign = TextAlign.Center
-            )
-        }
-        if (uiState.value.lastTransfers.isEmpty()) {
-            Image(
-                painter = painterResource(id = R.drawable.collection_list_is_empty),
-                contentDescription = null,
-                alignment = Alignment.Center,
-                modifier = Modifier.fillMaxSize()
-            )
-        } else {
-            LazyColumn {
-                items(uiState.value.lastTransfers.size) {
-                    Transfer(uiState.value.lastTransfers[it])
                 }
             }
         }
+        PullRefreshIndicator(
+            refreshing = uiState.value.isLoading,
+            state = pullRefreshState,
+            modifier = Modifier.align(alignment = Alignment.TopCenter),
+            backgroundColor = if (uiState.value.isLoading) Color.Red else Color.Green
+        )
     }
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(PasswordBackGroundGray)

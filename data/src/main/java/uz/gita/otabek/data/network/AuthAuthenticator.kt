@@ -13,7 +13,6 @@ internal class AuthAuthenticator @Inject constructor(
     private val localStorage: LocalStorage,
     private val oAuthApiLazy: dagger.Lazy<AuthApi>,
 ) : Authenticator {
-
     companion object {
         const val HEADER_AUTHORIZATION = "Authorization"
         const val TOKEN_TYPE = "Bearer"

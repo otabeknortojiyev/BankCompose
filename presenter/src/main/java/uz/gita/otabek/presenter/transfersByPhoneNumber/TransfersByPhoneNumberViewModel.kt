@@ -3,7 +3,10 @@ package uz.gita.otabek.presenter.transfersByPhoneNumber
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
@@ -20,59 +23,57 @@ class TransfersByPhoneNumberViewModel @Inject constructor(
     private val getCardOwnerByPan: GetCardOwnerByPanUseCase,
     private val getFee: GetFeeUseCase,
     private val transfer: TransferUseCase,
-    private val getCards: GetCardsUseCase
+    private val getCards: GetCardsUseCase,
 ) : ViewModel(), TransfersByPhoneNumberContract.ViewModel {
     override fun onEventDispatcher(intent: TransfersByPhoneNumberContract.Intent) = intent {
         when (intent) {
             is TransfersByPhoneNumberContract.Intent.GetCardOwnerByPan -> {
-                reduce { state.copy(isLoading = true) }
-                viewModelScope.launch {
-                    getCardOwnerByPan(TransferRequest.GetCardOwnerByPan(intent.receiverPan))
-                        .onSuccess {
-                            reduce { state.copy(receiverName = it.pan) }
-                        }.onFailure {
+                getCardOwnerByPan.invoke(TransferRequest.GetCardOwnerByPan(intent.receiverPan)).onStart {
+                    reduce { state.copy(isLoading = true) }
+                }.onEach { result ->
+                    result.onSuccess {
+                        reduce { state.copy(receiverName = it.pan) }
+                    }.onFailure {
 
-                        }
-                    reduce { state.copy(isLoading = false) }
-                }
+                    }
+                }.onCompletion { reduce { state.copy(isLoading = false) } }.launchIn(viewModelScope)
             }
 
             is TransfersByPhoneNumberContract.Intent.GetFee -> {
-                reduce { state.copy(isLoading = true) }
-                viewModelScope.launch {
-                    getFee(TransferRequest.GetFee(intent.senderId, intent.receiver, intent.amount))
-                        .onSuccess {
-                            reduce { state.copy(fee = it.fee, amountWithFee = it.amount) }
-                        }.onFailure {
+                getFee.invoke(TransferRequest.GetFee(intent.senderId, intent.receiver, intent.amount)).onStart {
+                    reduce { state.copy(isLoading = true) }
+                }.onEach { result ->
+                    result.onSuccess {
+                        reduce { state.copy(fee = it.fee, amountWithFee = it.amount) }
+                    }.onFailure {
 
-                        }
-                    reduce { state.copy(isLoading = false) }
-                }
+                    }
+                }.onCompletion { reduce { state.copy(isLoading = false) } }.launchIn(viewModelScope)
             }
 
             is TransfersByPhoneNumberContract.Intent.MakeTransfer -> {
-                reduce { state.copy(isLoading = true) }
-                viewModelScope.launch {
-                    val result = transfer(TransferRequest.Transfer(intent.type, intent.senderId, intent.receiverPan, intent.amount))
+                transfer.invoke(TransferRequest.Transfer(intent.type, intent.senderId, intent.receiverPan, intent.amount)).onStart {
+                    reduce { state.copy(isLoading = true) }
+                }.onEach { result ->
                     result.onSuccess {
                         directions.moveToTransferVerify()
                     }.onFailure {
 
                     }
-                    reduce { state.copy(isLoading = false) }
-                }
+                }.onCompletion { reduce { state.copy(isLoading = false) } }.launchIn(viewModelScope)
             }
 
             TransfersByPhoneNumberContract.Intent.GetCards -> {
-                viewModelScope.launch {
-                    getCards().onSuccess {
+                getCards.invoke().onEach { result ->
+                    result.onSuccess {
                         reduce { state.copy(cards = it, balance = it[0].amount) }
                     }.onFailure {
 
                     }
-                }
+                }.launchIn(viewModelScope)
             }
-            TransfersByPhoneNumberContract.Intent.MoveToBack->{
+
+            TransfersByPhoneNumberContract.Intent.MoveToBack -> {
                 directions.moveToBack()
             }
         }

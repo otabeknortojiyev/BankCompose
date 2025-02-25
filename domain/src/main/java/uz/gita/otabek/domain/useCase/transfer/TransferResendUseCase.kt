@@ -5,5 +5,5 @@ import uz.gita.otabek.common.request.TransferRequest
 import uz.gita.otabek.common.response.TransferResponse
 
 interface TransferResendUseCase {
-    suspend operator fun invoke(data: TransferRequest.TransferResend): Result<TransferResponse.TransferResend>
+    operator fun invoke(data: TransferRequest.TransferResend): Flow<Result<TransferResponse.TransferResend>>
 }

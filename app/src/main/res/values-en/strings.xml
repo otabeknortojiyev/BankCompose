@@ -71,4 +71,11 @@
     <string name="transfer_by_phone_number_screen_to">To</string>
     <string name="transfer_by_phone_number_screen_write_pan">Enter card number</string>
     <string name="transfer_by_phone_number_screen_chose_card">Choose card</string>
+    <string name="payments_title">Payment for services</string>
+    <string name="payments_mobile">Mobile communications</string>
+    <string name="payments_utility">Public utilities</string>
+    <string name="payments_internet">Internet</string>
+    <string name="payments_tv">TV</string>
+    <string name="payments_government">Government services and fines</string>
+    <string name="payments_phone">Home phone</string>
 </resources>

@@ -88,8 +88,7 @@ private fun HomeScreenContent(
 ) {
     LaunchedEffect(Unit) { onEventDispatcher(HomeContracts.Intent.GetInitData) }
 
-    val pullRefreshState =
-        rememberPullRefreshState(refreshing = uiState.value.isLoading, onRefresh = { onEventDispatcher(HomeContracts.Intent.GetInitData) })
+    val pullRefreshState = rememberPullRefreshState(refreshing = uiState.value.isLoading, onRefresh = { onEventDispatcher(HomeContracts.Intent.GetInitData) })
     var isHidden by remember { mutableStateOf(false) }
     val animatedBalance by animateIntAsState(
         targetValue = uiState.value.balance, label = "", animationSpec = tween(durationMillis = 3000, easing = LinearOutSlowInEasing)
@@ -134,9 +133,7 @@ private fun HomeScreenContent(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
+                            .padding(top = 4.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Image(painter = painterResource(id = if (isHidden) R.drawable.eye_hidden else R.drawable.eye_show),
                             contentDescription = null,
@@ -163,9 +160,7 @@ private fun HomeScreenContent(
                             )
                         }
                         Image(
-                            painter = painterResource(id = R.drawable.arrows_left_right),
-                            contentDescription = null,
-                            modifier = Modifier.padding(end = 16.dp)
+                            painter = painterResource(id = R.drawable.arrows_left_right), contentDescription = null, modifier = Modifier.padding(end = 16.dp)
                         )
                     }
                 }
@@ -215,9 +210,7 @@ private fun HomeScreenContent(
                 }
                 item {
                     Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier
+                        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 26.dp)
                     ) {
@@ -261,19 +254,11 @@ private fun HomeScreenContent(
                             for (i in 0 until uiState.value.cards.size) {
                                 if (i == uiState.value.cards.size - 1) {
                                     MiniCards(
-                                        type = uiState.value.cards[i].themeType,
-                                        16.dp,
-                                        uiState.value.cards[i].pan,
-                                        uiState.value.cards[i].amount,
-                                        isHidden
+                                        type = uiState.value.cards[i].themeType, 16.dp, uiState.value.cards[i].pan, uiState.value.cards[i].amount, isHidden
                                     )
                                 } else {
                                     MiniCards(
-                                        type = uiState.value.cards[i].themeType,
-                                        0.dp,
-                                        uiState.value.cards[i].pan,
-                                        uiState.value.cards[i].amount,
-                                        isHidden
+                                        type = uiState.value.cards[i].themeType, 0.dp, uiState.value.cards[i].pan, uiState.value.cards[i].amount, isHidden
                                     )
                                 }
                             }
@@ -365,11 +350,7 @@ private fun HomeScreenContent(
                             )
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(
-                                textAlign = TextAlign.Center,
-                                text = "$ USD",
-                                color = Color.Black,
-                                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                                fontSize = 20.sp
+                                textAlign = TextAlign.Center, text = "$ USD", color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 20.sp
                             )
                         }
                         Column(modifier = Modifier.padding(20.dp)) {
@@ -381,11 +362,7 @@ private fun HomeScreenContent(
                             )
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(
-                                textAlign = TextAlign.Center,
-                                text = "12 670",
-                                color = Color.Black,
-                                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                                fontSize = 20.sp
+                                textAlign = TextAlign.Center, text = "12 670", color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 20.sp
                             )
                         }
                         Column(modifier = Modifier.padding(20.dp)) {
@@ -397,19 +374,14 @@ private fun HomeScreenContent(
                             )
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(
-                                textAlign = TextAlign.Center,
-                                text = "12 750",
-                                color = Color.Black,
-                                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                                fontSize = 20.sp
+                                textAlign = TextAlign.Center, text = "12 750", color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 20.sp
                             )
                         }
                     }
                 }
                 item {
                     Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
+                        verticalAlignment = Alignment.CenterVertically, modifier = Modifier
                             .fillMaxWidth()
                             .padding(start = 16.dp, end = 16.dp, top = 24.dp)
                     ) {
@@ -474,26 +446,14 @@ fun Services(image: Int, text1: String, text2: String, text3: String, end: Dp) {
                     .padding(top = 4.dp)
             ) {
                 Text(
-                    text = text1,
-                    color = Color.Black,
-                    fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                    fontSize = 12.sp,
-                    modifier = Modifier.padding(start = 10.dp)
+                    text = text1, color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 12.sp, modifier = Modifier.padding(start = 10.dp)
                 )
                 Text(
-                    text = text2,
-                    color = Color.Black,
-                    fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                    fontSize = 12.sp,
-                    modifier = Modifier.padding(start = 10.dp)
+                    text = text2, color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), fontSize = 12.sp, modifier = Modifier.padding(start = 10.dp)
                 )
             }
             Text(
-                text = text3,
-                color = Color.Gray,
-                fontSize = 12.sp,
-                fontFamily = FontFamily(Font(R.font.montserrat_light)),
-                modifier = Modifier
+                text = text3, color = Color.Gray, fontSize = 12.sp, fontFamily = FontFamily(Font(R.font.montserrat_light)), modifier = Modifier
                     .weight(1f)
                     .padding(start = 10.dp)
             )
@@ -526,10 +486,7 @@ fun MiniCards(type: Int, bottom: Dp, pan: String, balance: Int, isHidden: Boolea
                 ), verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = pan,
-                color = Color.Black,
-                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                modifier = Modifier.padding(bottom = 6.dp, start = 8.dp)
+                text = pan, color = Color.Black, fontFamily = FontFamily(Font(R.font.montserrat_semibold)), modifier = Modifier.padding(bottom = 6.dp, start = 8.dp)
             )
             Image(painter = painterResource(id = if (type % 2 == 0) R.drawable.humo2 else R.drawable.uzcard), contentDescription = null)
         }
@@ -554,10 +511,7 @@ fun MiniCards(type: Int, bottom: Dp, pan: String, balance: Int, isHidden: Boolea
                 )
             }
             Text(
-                text = if (type % 2 == 0) "HUMO" else "UZCARD",
-                color = Color.Gray,
-                fontFamily = FontFamily(Font(R.font.montserrat_regular)),
-                fontSize = 12.sp
+                text = if (type % 2 == 0) "HUMO" else "UZCARD", color = Color.Gray, fontFamily = FontFamily(Font(R.font.montserrat_regular)), fontSize = 12.sp
             )
         }
     }

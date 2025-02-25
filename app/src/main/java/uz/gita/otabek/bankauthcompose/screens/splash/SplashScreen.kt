@@ -50,7 +50,7 @@ object SplashScreen : Screen {
 @SuppressLint("ResourceAsColor")
 @Composable
 private fun SplashScreenContent(
-    uiState: State<SplashContract.UiState>, onEventDispatcher: (SplashContract.Intent) -> Unit
+    uiState: State<SplashContract.UiState>, onEventDispatcher: (SplashContract.Intent) -> Unit,
 ) {
     val context = LocalContext.current
     LaunchedEffect(Unit) {

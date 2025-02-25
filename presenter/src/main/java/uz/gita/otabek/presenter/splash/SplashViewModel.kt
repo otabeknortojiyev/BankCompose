@@ -3,7 +3,8 @@ package uz.gita.otabek.presenter.splash
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
@@ -14,14 +15,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val direction: SplashContract.Direction, private val checkPIN: CheckPINUseCase, private val checkLanguage: CheckLanguageUseCase
+    private val direction: SplashContract.Direction, private val checkPIN: CheckPINUseCase, private val checkLanguage: CheckLanguageUseCase,
 ) : ViewModel(), SplashContract.ViewModel {
 
     override fun onEventDispatcher(intent: SplashContract.Intent) = intent {
         when (intent) {
             SplashContract.Intent.MoveToPIN -> {
-                viewModelScope.launch {
-                    val result = checkPIN()
+                checkPIN.invoke().onEach { result ->
                     result.onSuccess {
                         if (it) {
                             direction.moveToPIN()
@@ -31,12 +31,11 @@ class SplashViewModel @Inject constructor(
                     }.onFailure {
 
                     }
-                }
+                }.launchIn(viewModelScope)
             }
 
             SplashContract.Intent.CheckLanguage -> {
-                viewModelScope.launch {
-                    val result = checkLanguage()
+                checkLanguage.invoke().onEach { result ->
                     result.onSuccess {
                         when (it) {
                             Lang.UZ.value -> {
@@ -54,7 +53,7 @@ class SplashViewModel @Inject constructor(
                     }.onFailure {
 
                     }
-                }
+                }.launchIn(viewModelScope)
             }
         }
     }

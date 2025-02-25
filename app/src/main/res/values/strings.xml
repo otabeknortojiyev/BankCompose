@@ -77,4 +77,12 @@
     <string name="transfer_by_phone_number_screen_to">Куда</string>
     <string name="transfer_by_phone_number_screen_write_pan">Укажите номер</string>
     <string name="transfer_by_phone_number_screen_chose_card">Выберите карту</string>
+
+    <string name="payments_title">Oплата услуг</string>
+    <string name="payments_mobile">Мобильная связь</string>
+    <string name="payments_utility">Коммунальные услуги</string>
+    <string name="payments_internet">Интернет</string>
+    <string name="payments_tv">Телевидение</string>
+    <string name="payments_government">Госуслуги и штрафы</string>
+    <string name="payments_phone">Домашний телефон</string>
 </resources>

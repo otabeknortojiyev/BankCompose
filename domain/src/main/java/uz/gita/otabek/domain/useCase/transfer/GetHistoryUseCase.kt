@@ -5,5 +5,5 @@ import uz.gita.otabek.common.request.TransferRequest
 import uz.gita.otabek.common.response.TransferResponse
 
 interface GetHistoryUseCase {
-    suspend operator fun invoke(data: TransferRequest.GetHistory): Result<TransferResponse.GetHistory>
+    operator fun invoke(data: TransferRequest.GetHistory): Flow<Result<TransferResponse.GetHistory>>
 }

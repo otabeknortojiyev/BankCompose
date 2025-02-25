@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 import uz.gita.otabek.common.response.HomeResponse
 
 interface LastTransfersUseCase {
-    suspend operator fun invoke(): Result<HomeResponse.LastTransfers>
+    operator fun invoke(): Flow<Result<HomeResponse.LastTransfers>>
 }

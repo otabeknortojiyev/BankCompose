@@ -1,5 +1,7 @@
 package uz.gita.otabek.domain.useCase.auth
 
+import kotlinx.coroutines.flow.Flow
+
 interface SavePINUseCase {
-    suspend operator fun invoke(pin: String): Result<Unit>
+    operator fun invoke(pin: String): Flow<Result<Unit>>
 }

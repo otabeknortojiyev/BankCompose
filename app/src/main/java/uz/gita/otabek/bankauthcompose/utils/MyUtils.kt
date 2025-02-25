@@ -5,9 +5,7 @@ import android.content.Context
 fun String.isLetter(): Boolean {
     var count: Int = 0
     this.forEach {
-        if ((it in 'A'..'Z') ||
-            (it in 'a'..'z')
-        ) count++
+        if ((it in 'A'..'Z') || (it in 'a'..'z')) count++
     }
     return count == this.length
 }
@@ -29,13 +27,16 @@ enum class CardType(val value: String) {
     UZCARD("uzcard"), HUMO("humo")
 }
 
+enum class PaymentType() {
+    MOBILE, UTILITY, INTERNET, TV, GOVERNMENT, HOME_PHONE
+}
+
 enum class Type(val value: String) {
     INCOME("income"), OUTCOME("outcome")
 }
 
 enum class Phone(val value: String) {
-    PREFIX("+998"),
-    MASK("##-###-##-##")
+    PREFIX("+998"), MASK("##-###-##-##")
 }
 
 enum class Card(val value: String) {
@@ -47,8 +48,5 @@ enum class Date(val value: String) {
 }
 
 fun String.formatNumberWithSpaces(): String {
-    return this.reversed()
-        .chunked(3)
-        .joinToString(" ")
-        .reversed()
+    return this.reversed().chunked(3).joinToString(" ").reversed()
 }

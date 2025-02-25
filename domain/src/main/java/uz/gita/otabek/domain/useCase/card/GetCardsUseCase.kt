@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 import uz.gita.otabek.common.response.CardResponse
 
 interface GetCardsUseCase {
-    suspend operator fun invoke(): Result<List<CardResponse.CardItem>>
+    operator fun invoke(): Flow<Result<List<CardResponse.CardItem>>>
 }

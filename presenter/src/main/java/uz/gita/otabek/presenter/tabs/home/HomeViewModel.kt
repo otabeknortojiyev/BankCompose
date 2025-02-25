@@ -3,8 +3,10 @@ package uz.gita.otabek.presenter.tabs.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
@@ -24,26 +26,35 @@ class HomeViewModel @Inject constructor(
     override fun onEventDispatcher(intent: HomeContracts.Intent) = intent {
         when (intent) {
             HomeContracts.Intent.GetInitData -> {
-                reduce { state.copy(isLoading = true) }
-                viewModelScope.launch {
-                    basicInfoUseCase().onSuccess {
+                basicInfoUseCase.invoke().onStart {
+                    reduce { state.copy(isLoading = true) }
+                }.onEach { result ->
+                    result.onSuccess {
                         reduce { state.copy(name = it.firstName) }
                     }.onFailure {
 
                     }
-                    totalBalanceUseCase().onSuccess {
+                }.onCompletion { reduce { state.copy(isLoading = false) } }.launchIn(viewModelScope)
+
+                totalBalanceUseCase.invoke().onStart {
+                    reduce { state.copy(isLoading = true) }
+                }.onEach { result ->
+                    result.onSuccess {
                         reduce { state.copy(balance = it.totalBalance) }
                     }.onFailure {
 
                     }
-                    getCardsUseCase().onSuccess {
+                }.onCompletion { reduce { state.copy(isLoading = false) } }.launchIn(viewModelScope)
+
+                getCardsUseCase.invoke().onStart {
+                    reduce { state.copy(isLoading = true) }
+                }.onEach { result ->
+                    result.onSuccess {
                         reduce { state.copy(cards = it) }
                     }.onFailure {
 
                     }
-                    delay(5000)
-                    reduce { state.copy(isLoading = false) }
-                }
+                }.onCompletion { reduce { state.copy(isLoading = false) } }.launchIn(viewModelScope)
             }
 
             HomeContracts.Intent.MoveToMonitoring -> {

@@ -16,6 +16,7 @@ import uz.gita.otabek.bankauthcompose.screens.signUp.SignUpDirections
 import uz.gita.otabek.bankauthcompose.screens.signUpVerify.SignUpVerifyDirections
 import uz.gita.otabek.bankauthcompose.screens.splash.SplashDirections
 import uz.gita.otabek.bankauthcompose.screens.tabs.home.HomeDirections
+import uz.gita.otabek.bankauthcompose.screens.tabs.payments.PaymentsDirections
 import uz.gita.otabek.bankauthcompose.screens.tabs.transfers.TransferDirections
 import uz.gita.otabek.bankauthcompose.screens.transfersBetweenMyCacrds.TransfersBetweenMyCardsDirections
 import uz.gita.otabek.bankauthcompose.screens.transfersByPhoneNumber.TransfersByPhoneNumberDirections
@@ -30,6 +31,7 @@ import uz.gita.otabek.presenter.signUp.SignUpContract
 import uz.gita.otabek.presenter.signUpVerify.SignUpVerifyContract
 import uz.gita.otabek.presenter.splash.SplashContract
 import uz.gita.otabek.presenter.tabs.home.HomeContracts
+import uz.gita.otabek.presenter.tabs.payments.PaymentsContract
 import uz.gita.otabek.presenter.tabs.transfers.TransferContracts
 import uz.gita.otabek.presenter.transfersBetweenMyCards.TransfersBetweenMyCardsContract
 import uz.gita.otabek.presenter.transfersByPhoneNumber.TransfersByPhoneNumberContract
@@ -79,4 +81,7 @@ interface DirectionModule {
 
     @[Binds ViewModelScoped]
     fun bindTransferBetweenMyCardsDirection(impl: TransfersBetweenMyCardsDirections): TransfersBetweenMyCardsContract.Direction
+
+    @[Binds ViewModelScoped]
+    fun bindsPaymentsDirection(impl: PaymentsDirections): PaymentsContract.Direction
 }

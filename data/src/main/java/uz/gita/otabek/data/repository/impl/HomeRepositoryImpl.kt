@@ -13,7 +13,7 @@ import uz.gita.otabek.data.utils.toResult
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
-    private val api: HomeApi, private val storage: LocalStorage
+    private val api: HomeApi, private val storage: LocalStorage,
 ) : HomeRepository {
     private val gson = Gson()
     override suspend fun totalBalance(): Result<HomeResponse.TotalBalance> = withContext(Dispatchers.IO) {
@@ -53,7 +53,6 @@ class HomeRepositoryImpl @Inject constructor(
                 } catch (e: Exception) {
 
                 }
-
             }
             Result.success(HomeResponse.BasicInfo(cachedName, cachedGenderType, cachedAge))
         }

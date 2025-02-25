@@ -3,7 +3,10 @@ package uz.gita.otabek.presenter.monitoring
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
@@ -13,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MonitoringViewModel @Inject constructor(
     private val directions: MonitoringContract.Directions,
-    private val lastTransfersUseCase: LastTransfersUseCase
+    private val lastTransfersUseCase: LastTransfersUseCase,
 ) : ViewModel(), MonitoringContract.ViewModel {
     override fun onEventDispatcher(intent: MonitoringContract.Intent) = intent {
         when (intent) {
@@ -22,8 +25,9 @@ class MonitoringViewModel @Inject constructor(
             }
 
             MonitoringContract.Intent.DownloadLastTransfers -> {
-                viewModelScope.launch {
-                    val result = lastTransfersUseCase()
+                lastTransfersUseCase.invoke().onStart {
+                    reduce { state.copy(isLoading = true) }
+                }.onEach { result ->
                     result.onSuccess {
                         if (it.isEmpty()) {
                             reduce { state.copy(hasTransfers = false) }
@@ -33,7 +37,9 @@ class MonitoringViewModel @Inject constructor(
                     }.onFailure {
 
                     }
-                }
+                }.onCompletion {
+                    reduce { state.copy(isLoading = false) }
+                }.launchIn(viewModelScope)
             }
         }
     }

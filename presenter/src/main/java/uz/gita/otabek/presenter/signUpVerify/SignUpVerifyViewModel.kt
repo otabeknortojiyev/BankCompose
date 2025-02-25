@@ -3,7 +3,8 @@ package uz.gita.otabek.presenter.signUpVerify
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.otabek.domain.useCase.auth.SignUpResendUseCase
@@ -14,32 +15,23 @@ import javax.inject.Inject
 class SignUpVerifyViewModel @Inject constructor(
     private val direction: SignUpVerifyContract.Directions,
     private val signUpVerifyUseCase: SignUpVerifyUseCase,
-    private val signUpResendUseCase: SignUpResendUseCase
+    private val signUpResendUseCase: SignUpResendUseCase,
 ) :
     ViewModel(), SignUpVerifyContract.ViewModel {
     override fun onEventDispatcher(intent: SignUpVerifyContract.Intent) = intent {
         when (intent) {
             is SignUpVerifyContract.Intent.ClickNext -> {
-                viewModelScope.launch {
-                    val result = signUpVerifyUseCase(intent.code)
+                signUpVerifyUseCase.invoke(intent.code).onEach { result ->
                     result.onSuccess {
                         direction.moveToPassword()
-
                     }.onFailure {
 
                     }
-                }
+                }.launchIn(viewModelScope)
             }
 
             SignUpVerifyContract.Intent.ResendCode -> {
-                viewModelScope.launch {
-                    val result = signUpResendUseCase.invoke()
-                    result.onSuccess {
-
-                    }.onFailure {
-
-                    }
-                }
+                signUpResendUseCase.invoke().launchIn(viewModelScope)
             }
 
             SignUpVerifyContract.Intent.MoveToBack -> {

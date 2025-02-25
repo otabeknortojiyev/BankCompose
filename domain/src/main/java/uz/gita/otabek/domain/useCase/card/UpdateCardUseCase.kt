@@ -1,7 +1,8 @@
 package uz.gita.otabek.domain.useCase.card
 
+import kotlinx.coroutines.flow.Flow
 import uz.gita.otabek.common.request.CardRequest
 
 interface UpdateCardUseCase {
-    suspend operator fun invoke(data: CardRequest.UpdateCard): Result<Unit>
+    operator fun invoke(data: CardRequest.UpdateCard): Flow<Result<Unit>>
 }

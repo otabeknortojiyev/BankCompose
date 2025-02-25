@@ -1,8 +1,8 @@
 package uz.gita.otabek.domain.useCase.auth
 
-import kotlinx.coroutines.flow.Flow
 import uz.gita.otabek.common.request.AuthRequest
+import kotlinx.coroutines.flow.Flow
 
 interface SignUpUseCase {
-    suspend operator fun invoke(data: AuthRequest.SignUp): Result<Unit>
+    operator fun invoke(data: AuthRequest.SignUp): Flow<Result<Unit>>
 }

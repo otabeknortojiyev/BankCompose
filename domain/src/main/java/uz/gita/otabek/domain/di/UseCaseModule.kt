@@ -46,7 +46,7 @@ import uz.gita.otabek.domain.useCase.home.impl.FullInfoUseCaseImpl
 import uz.gita.otabek.domain.useCase.home.impl.LastTransfersUseCaseImpl
 import uz.gita.otabek.domain.useCase.home.impl.TotalBalanceUseCaseImpl
 import uz.gita.otabek.domain.useCase.home.impl.UpdateInfoUseCaseImpl
-import uz.gita.otabek.domain.useCase.impl.SignUpVerifyUseCaseImpl
+import uz.gita.otabek.domain.useCase.auth.impl.SignUpVerifyUseCaseImpl
 import uz.gita.otabek.domain.useCase.transfer.GetCardOwnerByPanUseCase
 import uz.gita.otabek.domain.useCase.transfer.GetFeeUseCase
 import uz.gita.otabek.domain.useCase.transfer.GetHistoryUseCase

@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 import uz.gita.otabek.common.request.TransferRequest
 
 interface TransferVerifyUseCase {
-    suspend operator fun invoke(data: TransferRequest.TransferVerify): Result<Unit>
+    operator fun invoke(data: TransferRequest.TransferVerify): Flow<Result<Unit>>
 }

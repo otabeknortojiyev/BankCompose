@@ -109,6 +109,8 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
         Column(
             modifier = Modifier
                 .weight(1f)
+                .clip(shape = RoundedCornerShape(20.dp))
+                .padding(4.dp)
                 .clickable { tabNavigator.current = tab },
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally

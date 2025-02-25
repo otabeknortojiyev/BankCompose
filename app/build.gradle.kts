@@ -29,11 +29,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
     buildFeatures {
         compose = true
@@ -73,7 +73,7 @@ dependencies {
 
     //CONSTRAINT_LAYOUT
     implementation(libs.androidx.constraintlayout.compose)
-    implementation(libs.accompanist.systemuicontroller) // Check for the latest version
+    implementation(libs.accompanist.systemuicontroller)
 
     //DAGGER_HILT
     implementation(libs.hilt.android)
@@ -99,14 +99,15 @@ dependencies {
     implementation(libs.voyager.bottom.sheet.navigator)
     implementation(libs.voyager.tab.navigator)
 
-    //API REQUEST names
-    implementation(libs.kotlinx.serialization.json)
 
     //Orbit
     implementation(libs.orbit.core)
     implementation(libs.orbit.viewmodel)
     implementation(libs.orbit.compose)
     testImplementation(libs.orbit.test)
+
+    //API REQUEST names
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(project(":common"))
     implementation(project(":presenter"))

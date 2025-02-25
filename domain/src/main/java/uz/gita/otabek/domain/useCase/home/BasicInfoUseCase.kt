@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 import uz.gita.otabek.common.response.HomeResponse
 
 interface BasicInfoUseCase {
-    suspend operator fun invoke(): Result<HomeResponse.BasicInfo>
+    operator fun invoke(): Flow<Result<HomeResponse.BasicInfo>>
 }

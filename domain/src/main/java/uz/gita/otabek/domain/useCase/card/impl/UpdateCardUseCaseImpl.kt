@@ -1,10 +1,12 @@
 package uz.gita.otabek.domain.useCase.card.impl
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import uz.gita.otabek.common.request.CardRequest
 import uz.gita.otabek.data.repository.CardRepository
 import uz.gita.otabek.domain.useCase.card.UpdateCardUseCase
 import javax.inject.Inject
 
 class UpdateCardUseCaseImpl @Inject constructor(private val cardRepository: CardRepository) : UpdateCardUseCase {
-    override suspend fun invoke(data: CardRequest.UpdateCard) = cardRepository.updateCard(data)
+    override fun invoke(data: CardRequest.UpdateCard): Flow<Result<Unit>> = flow { cardRepository.updateCard(data).apply { emit(this) } }
 }

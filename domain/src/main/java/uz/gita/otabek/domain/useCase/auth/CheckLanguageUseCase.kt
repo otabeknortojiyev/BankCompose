@@ -1,6 +1,8 @@
 package uz.gita.otabek.domain.useCase.auth
 
+import kotlinx.coroutines.flow.Flow
+
 
 interface CheckLanguageUseCase {
-    suspend operator fun invoke(): Result<String>
+    operator fun invoke(): Flow<Result<String>>
 }

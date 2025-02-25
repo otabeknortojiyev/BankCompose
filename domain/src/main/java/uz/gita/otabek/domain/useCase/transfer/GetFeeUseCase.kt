@@ -5,5 +5,5 @@ import uz.gita.otabek.common.request.TransferRequest
 import uz.gita.otabek.common.response.TransferResponse
 
 interface GetFeeUseCase {
-    suspend operator fun invoke(data: TransferRequest.GetFee): Result<TransferResponse.GetFee>
+    operator fun invoke(data: TransferRequest.GetFee): Flow<Result<TransferResponse.GetFee>>
 }

@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 import uz.gita.otabek.common.request.AuthRequest
 
 interface SignInResendUseCase {
-    suspend operator fun invoke() : Result<Unit>
+    operator fun invoke() : Flow<Result<Unit>>
 }

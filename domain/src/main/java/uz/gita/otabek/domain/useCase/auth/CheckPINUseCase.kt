@@ -1,5 +1,7 @@
 package uz.gita.otabek.domain.useCase.auth
 
+import kotlinx.coroutines.flow.Flow
+
 interface CheckPINUseCase {
-    suspend operator fun invoke(): Result<Boolean>
+    operator fun invoke(): Flow<Result<Boolean>>
 }
